@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie-edge">
+        <title>Skillify</title>
+        <link rel="icon" type="image/png" href="/icons/shrek.ico">
+        <link href="/style.css" rel="stylesheet" type="text/css">
+    </head>
+    <body>
+        <div class="container">
+            <div class="navigation">
+                <ul>
+                    <li>
+                        <a href="#">
+                            <span class="icon"><ion-icon name="school-outline"></ion-icon></span>
+                            <span class="title"> SKILLIFY</span>
+                        </a>
+                    </li>
+                    <li class="active">
+                        <a th:href="@{/home}">
+                            <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                            <span class="title"> Home</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/customers}">
+                            <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
+                            <span class="title"> Customers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/courses}">
+                            <span class="icon"><ion-icon name="document-outline"></ion-icon></span>
+                            <span class="title"> Courses</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/teachers}">
+                            <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                            <span class="title"> Teachers</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/analytics}">
+                            <span class="icon"><ion-icon name="podium-outline"></ion-icon></span>
+                            <span class="title"> Analytics</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a th:href="@{/settings}">
+                            <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
+                            <span class="title"> Settings</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="#">
+                            <span class="icon"><ion-icon name="information-circle-outline"></ion-icon></span>
+                            <span class="title"> Help</span>
+                        </a>
+                    </li>
+                    <li>
+                        <a href="signup.html">
+                            <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                            <span class="title"> Sign Out</span>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+
+            <!-- main -->
+            <div class="main">
+                <div class="topbar">
+                    <div class="toggle">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </div>
+                    <!-- search -->
+                    <div class="search">
+                        <label>
+                            <input type="text" placeholder="Search here">
+                            <ion-icon name="search-outline"></ion-icon>
+                        </label>
+                    </div>
+                    <!-- user image -->
+                    <div class="user">
+                        <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
+                    </div>
+                </div>
+
+                <!-- cards -->
+                <div class="cardBox">
+                    <div class="card">
+                        <div>
+                            <div class="numbers">1,504</div>
+                            <div class="cardName">Customers</div>
+                        </div>
+                        <div class="iconBox">
+                            <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <div class="numbers">42</div>
+                            <div class="cardName">Courses</div>
+                        </div>
+                        <div class="iconBox">
+                            <span class="icon"><ion-icon name="document-outline"></ion-icon></span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <div class="numbers">68</div>
+                            <div class="cardName">Teachers</div>
+                        </div>
+                        <div class="iconBox">
+                            <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <div>
+                            <div class="numbers">4500</div>
+                            <div class="cardName">Earnings</div>
+                        </div>
+                        <div class="iconBox">
+                            <ion-icon name="cash-outline"></ion-icon>
+                        </div>
+                    </div>
+                </div>
+                <!-- Add Chart-->
+                <div class="graphBox">
+                    <div class="box">
+                        <div id="main-page-chart">
+                            <div id="main-page-earnings-chart"></div>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="details">
+                    <!--order details list -->
+                    <div class="recentOrders">
+                        <div class="cardHeader">
+                            <h2>Recent Orders</h2>
+                            <a href="#" class="btn">Viev All</a>
+                        </div>
+                        <table>
+                            <thead>
+                                <tr>
+                                    <td>Name</td>
+                                    <td>Price</td>
+                                    <td>Payment</td>
+                                    <td>Status</td>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>Advanced Python</td>
+                                    <td>$1500</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Machine Learning</td>
+                                    <td>$3000</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Advanced Java</td>
+                                    <td>$1500</td>
+                                    <td>Paid</td>
+                                    <td><span class="status inprogress">In progress</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Cybersecurity</td>
+                                    <td>$8000</td>
+                                    <td>Paid</td>
+                                    <td><span class="status delivered">Delivered</span></td>
+                                </tr>
+                                <tr>
+                                    <td>Advanced C#</td>
+                                    <td>$1500</td>
+                                    <td>Paid</td>
+                                    <td><span class="status canceled">Canceled</span></td>
+                                </tr>
+                                <tr>
+                                    <td>DevOps Fundamentals</td>
+                                    <td>$2000</td>
+                                    <td>Paid</td>
+                                    <td><span class="status inprogress">In progress</span></td>
+                                </tr>
+                            </tbody>
+                        </table>
+                    </div>
+                    <!--New Customers List -->
+                    <div class="recentCustomers">
+                        <div class="cardHeader">
+                            <h2>Recent Customers</h2>
+                        </div>
+                        <table>
+                            <tr>
+                                <td width="60px"><div class="imgBx"><img src="img/img1.jpg"></div></td>
+                                <td><h4>Harry<br><span>Google</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><div class="imgBx"><img src="img/img2.jpg"></div></td>
+                                <td><h4>Franklin<br><span>Meta</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><div class="imgBx"><img src="img/img3.jpg"></div></td>
+                                <td><h4>Alexa<br><span>Meta</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><div class="imgBx"><img src="img/img4.jpg"></div></td>
+                                <td><h4>Anastasia<br><span>Apple</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><div class="imgBx"><img src="img/img5.jpg"></div></td>
+                                <td><h4>Michael<br><span>Tesla</span></h4></td>
+                            </tr>
+                            <tr>
+                                <td width="60px"><div class="imgBx"><img src="img/img6.jpg"></div></td>
+                                <td><h4>Arasaka<br><span>OpenAI</span></h4></td>
+                            </tr>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script type="module" src="/js/mainPageChart1.js"></script>
+        <script src="/js/toggle.js"></script>
+    </body>
+</html>

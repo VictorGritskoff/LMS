@@ -1,0 +1,158 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie-edge">
+        <title>Skillify</title>
+        <link rel="icon" type="image/png" href="/icons/shrek.ico">
+        <link rel="stylesheet" href="/style.css">
+    </head>
+    <body>
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="school-outline"></ion-icon></span>
+                        <span class="title"> SKILLIFY</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/home}">
+                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="title"> Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/customers}">
+                        <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
+                        <span class="title"> Customers</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/courses}">
+                        <span class="icon"><ion-icon name="document-outline"></ion-icon></span>
+                        <span class="title"> Courses</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/teachers}">
+                        <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                        <span class="title"> Teachers</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/analytics}">
+                        <span class="icon"><ion-icon name="podium-outline"></ion-icon></span>
+                        <span class="title"> Analytics</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a th:href="@{/settings}">
+                        <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
+                        <span class="title"> Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="information-circle-outline"></ion-icon></span>
+                        <span class="title"> Help</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="signup.html">
+                        <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                        <span class="title"> Sign Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+            <!-- main -->
+            <div class="main">
+                <div class="topbar">
+                    <div class="toggle">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </div>
+                    <!-- search -->
+                    <div class="search">
+                        <label>
+                            <input type="text" placeholder="Search here">
+                            <ion-icon name="search-outline"></ion-icon>
+                        </label>
+                    </div>
+                    <!-- user image -->
+                    <div class="user">
+                        <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
+                    </div>
+                </div>
+
+            <!-- body -->
+            <div class="settings-page">
+                <div class="settings-box">
+                    <h1>Settings</h1>
+                    <div class="controls">
+                        <h2>Application</h2>
+                        <a>Control the App if there is Maintenance</a>
+                        <div class="checkbox-wrapper">
+                            <h3>Change Theme</h3>
+                            <input type="checkbox" id="changeTheme-check">
+                            <label for="changeTheme-check" class="oval-checkbox"></label>
+                        </div>
+                        <div class="checkbox-wrapper">
+                            <h3>Send Notifications</h3>
+                            <input type="checkbox" id="changeNotifications-check">
+                            <label for="changeNotifications-check" class="oval-checkbox"></label>
+                        </div>
+                       <div class="others-settings">
+                        <h2>Others</h2>
+                        <a>Other settings</a>
+                            <div class="others-wrapper">
+                                <h3>Change Language</h3>
+                                <div class="language-dropdown">
+                                    <select id="language-select">
+                                        <option value="en">English</option>
+                                        <option value="ru">Русский</option>
+                                    </select>
+                                </div>
+                            </div>
+                       </div>
+                    </div>
+                </div>
+                <div class="profile-box">
+                    <h1>Profile</h1>
+                    <div class="profile-info">
+                        <div class="avatar"></div>
+                        <div class="profile-details">
+                            <div class="input-group">
+                                <label for="firstName">First Name:</label>
+                                <input type="text" id="firstName" name="firstName" disabled>
+                            </div>
+                            <div class="input-group">
+                                <label for="lastName">Last Name:</label>
+                                <input type="text" id="lastName" name="lastName" disabled>
+                            </div>
+                            <div class="input-group">
+                                <label for="username">Username:</label>
+                                <input type="text" id="username" name="username" disabled>
+                            </div>
+                            <div class="input-group">
+                                <label for="password">Password:</label>
+                                <input type="password" id="password" name="password" disabled>
+                            </div>
+                            <div class="input-group">
+                                <label for="email">Email:</label>
+                                <input type="email" id="email" name="email" disabled>
+                            </div>
+                        </div>
+                    </div>
+                    <button class="edit-button">Edit</button>
+                </div>
+            </div>
+
+
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <script src="/js/toggle.js"></script>
+    </body>
+</html>

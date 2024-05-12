@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang = "en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>Skillify</title>
+    <link rel="icon" type="image/png" href="/icons/shrek.ico">
+    <link rel="stylesheet" href="/css/signup.css">
+    <link rel="stylesheet" href="/css/notifications.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css" integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+</head>
+<body>
+<div class="container">
+    <div class="blueBg">
+        <div class="box signin">
+            <h2>Already Have an Account?</h2>
+            <button class="signinBtn">Sign In</button>
+        </div>
+        <div class="box signup">
+            <h2>Don't Have an Account?</h2>
+            <button class="signupBtn">Sign Up</button>
+        </div>
+    </div>
+    <div class="formBx">
+        <div class="form signinForm">
+            <form action="/login" method="post" id="authForm">
+                <h3>Sign In</h3>
+                <input type="text" name="username" placeholder="Username">
+                <input type="password" name="password" placeholder="Password">
+                <input type="submit" value="Login" onclick="loginUser(event)">
+                <a href="#" class="forgot">Forgot Password</a>
+            </form>
+        </div>
+        <div class="form signupForm">
+            <form action="/register/user" method="post" id="registerForm">
+                <h3>Sign Up</h3>
+                <input type="text" name="new_username" placeholder="Username">
+                <input type="text" name="firstName" placeholder="First Name">
+                <input type="text" name="lastName" placeholder="Last Name">
+                <input type="email" name="email" placeholder="Email Address">
+                <input type="password" name="new_password" placeholder="Password">
+                <input type="password" name="confirmPassword" placeholder="Confirm Password">
+                <input type="submit" value="Register" onclick="registerUser(event)">
+            </form>
+        </div>
+    </div>
+    <div class="notifications"></div>
+</div>
+<script src="/js/login-register-transition.js"></script>
+<script src="/js/register-user.js"></script>
+<script src="/js/login-user.js"></script>
+</body>
+</html>

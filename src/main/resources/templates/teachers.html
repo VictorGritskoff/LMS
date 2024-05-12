@@ -1,0 +1,295 @@
+<!DOCTYPE html>
+<html lang = "en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <meta http-equiv="X-UA-Compatible" content="ie-edge">
+        <title>Skillify</title>
+        <link rel="icon" type="image/png" href="/icons/shrek.ico">
+        <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css">
+        <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
+        <link rel="stylesheet" href="/style.css">
+
+    </head>
+    <body>
+        <div class="navigation">
+            <ul>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="school-outline"></ion-icon></span>
+                        <span class="title"> SKILLIFY</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/home}">
+                        <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                        <span class="title"> Home</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/customers}">
+                        <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
+                        <span class="title"> Customers</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/courses}">
+                        <span class="icon"><ion-icon name="document-outline"></ion-icon></span>
+                        <span class="title"> Courses</span>
+                    </a>
+                </li>
+                <li class="active">
+                    <a th:href="@{/teachers}">
+                        <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                        <span class="title"> Teachers</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/analytics}">
+                        <span class="icon"><ion-icon name="podium-outline"></ion-icon></span>
+                        <span class="title"> Analytics</span>
+                    </a>
+                </li>
+                <li>
+                    <a th:href="@{/settings}">
+                        <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
+                        <span class="title"> Settings</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="#">
+                        <span class="icon"><ion-icon name="information-circle-outline"></ion-icon></span>
+                        <span class="title"> Help</span>
+                    </a>
+                </li>
+                <li>
+                    <a href="signup.html">
+                        <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                        <span class="title"> Sign Out</span>
+                    </a>
+                </li>
+            </ul>
+        </div>
+
+            <!-- main -->
+            <div class="main">
+                <div class="topbar">
+                    <div class="toggle">
+                        <ion-icon name="menu-outline"></ion-icon>
+                    </div>
+                    <!-- search -->
+                    <div class="search">
+                        <label>
+                            <input type="text" placeholder="Search here">
+                            <ion-icon name="search-outline"></ion-icon>
+                        </label>
+                    </div>
+                    <!-- user image -->
+                    <div class="user">
+                        <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
+                    </div>
+                </div>
+
+                <!-- charts -->
+                <div class="charts">
+                    <div class="charts-grid">
+                              <div class="col-md-6">
+                                <div class="box box1">
+                                  <div id="spark1"></div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="box box2">
+                                  <div id="spark2"></div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="box box3">
+                                  <div id="spark3"></div>
+                                </div>
+                              </div>
+                              <div class="col-md-6">
+                                <div class="box box4">
+                                  <div id="spark4"></div>
+                                </div>
+                            </div>
+                    </div>                
+                </div>
+                <!-- teachers table -->
+                <div class="teachers-container">
+                    <h1>Teachers</h1>
+                    <table id= "example" class="teachers-table" style="width: 100%">
+                        <thead>
+                            <tr>
+                                <th>Name</th>
+                                <th>Email</th>
+                                <th>Position</th>
+                                <th>Start Date</th>
+                                <th>Courses</th>
+                                <th>Salary</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            <tr>
+                                <td>John Smith</td>
+                                <td>john@example.com</td>
+                                <td>Computer Science Teacher</td>
+                                <td>2023-05-15</td>
+                                <td>Advanced Python</td>
+                                <td>$50,000</td>
+                            </tr>
+                            <tr>
+                                <td>Alice Johnson</td>
+                                <td>alice@example.com</td>
+                                <td>Computer Science Teacher</td>
+                                <td>2023-03-20</td>
+                                <td>Advanced Java</td>
+                                <td>$48,000</td>
+                            </tr>
+                            <tr>
+                                <td>Michael Brown</td>
+                                <td>michael@example.com</td>
+                                <td>Computer Science Teacher</td>
+                                <td>2023-06-10</td>
+                                <td>Cybersecurity</td>
+                                <td>$55,000</td>
+                            </tr>
+                            <tr>
+                                <td>Emily Davis</td>
+                                <td>emily@example.com</td>
+                                <td>Computer Science Teacher</td>
+                                <td>2023-02-28</td>
+                                <td>Advanced C#</td>
+                                <td>$47,000</td>
+                            </tr>
+                            <tr>
+                                <td>David Wilson</td>
+                                <td>david@example.com</td>
+                                <td>Computer Science Teacher</td>
+                                <td>2023-09-05</td>
+                                <td>DevOps Fundamentals</td>
+                                <td>$46,000</td>
+                            </tr>
+                            <tr>
+                                <td>Sarah Martinez</td>
+                                <td>sarah@example.com</td>
+                                <td>Computer Science Teacher</td>
+                                <td>2023-07-15</td>
+                                <td>Advanced JavaScript</td>
+                                <td>$49,000</td>
+                            </tr>
+                            <tr>
+                                <td>William Thompson</td>
+                                <td>william@example.com</td>
+                                <td>Computer Science Teacher</td>
+                                <td>2023-04-20</td>
+                                <td>Machine Learning Basics</td>
+                                <td>$52,000</td>
+                            </tr>
+                            <tr>
+                                <td>Olivia Garcia</td>
+                                <td>olivia@example.com</td>
+                                <td>Computer Science Teacher</td>
+                                <td>2023-11-12</td>
+                                <td>Data Structures and Algorithms</td>
+                                <td>$51,000</td>
+                            </tr>
+                            <tr>
+                                <td>James Allen</td>
+                                <td>james@example.com</td>
+                                <td>Computer Science Teacher</td>
+                                <td>2023-08-08</td>
+                                <td>Web Development Fundamentals</td>
+                                <td>$53,000</td>
+                            </tr>
+                            <tr>
+                                <td>Emma Baker</td>
+                                <td>emma@example.com</td>
+                                <td>Computer Science Teacher</td>
+                                <td>2023-10-25</td>
+                                <td>Database Management Systems</td>
+                                <td>$45,000</td>
+                            </tr>
+                        </tbody>                        
+                    </table>
+                </div>
+
+                <!-- cards -->
+                <div class="teachers-cards">
+                    <div class="card">
+                        <img src="img/img1.jpg" alt="Person 1">
+                        <h2>Person 1</h2>
+                        <p class="card-description">Lorem ipsum dolor, sit amet consectetur adipisicing elit. Eum facere eligendi accusantium praesentium laudantium esse veniam quidem repudiandae voluptatibus alias veritatis nisi repellat ipsa eius debitis ad, architecto dolorum ipsam?</p>
+                        <div class="buttons">
+                            <button class="edit-btn">Изменить</button>
+                            <button class="delete-btn">Удалить</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="img/img2.jpg" alt="Person 2">
+                        <h2>Person 2</h2>
+                        <p class="card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Mollitia enim recusandae eligendi inventore, atque veniam alias voluptatum modi consequuntur corrupti vitae in repudiandae. Beatae doloremque illum repudiandae et, eum deleniti!</p>
+                        <div class="buttons">
+                            <button class="edit-btn">Изменить</button>
+                            <button class="delete-btn">Удалить</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="img/img3.jpg" alt="Person 3">
+                        <h2>Person 3</h2>
+                        <p class="card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ad officia magni aliquam dolorum esse, fuga maxime dolore perspiciatis tempora quam officiis cum suscipit velit dolores commodi a beatae quis.</p>
+                        <div class="buttons">
+                            <button class="edit-btn">Изменить</button>
+                            <button class="delete-btn">Удалить</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="img/img6.jpg" alt="Person 6">
+                        <h2>Person 6</h2>
+                        <p class="card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ad officia magni aliquam dolorum esse, fuga maxime dolore perspiciatis tempora quam officiis cum suscipit velit dolores commodi a beatae quis.</p>
+                        <div class="buttons">
+                            <button class="edit-btn">Изменить</button>
+                            <button class="delete-btn">Удалить</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="img/img4.jpg" alt="Person 4">
+                        <h2>Person 4</h2>
+                        <p class="card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ad officia magni aliquam dolorum esse, fuga maxime dolore perspiciatis tempora quam officiis cum suscipit velit dolores commodi a beatae quis.</p>
+                        <div class="buttons">
+                            <button class="edit-btn">Изменить</button>
+                            <button class="delete-btn">Удалить</button>
+                        </div>
+                    </div>
+                    <div class="card">
+                        <img src="img/img5.jpg" alt="Person 5">
+                        <h2>Person 5</h2>
+                        <p class="card-description">Lorem ipsum dolor sit amet consectetur adipisicing elit. Sit ad officia magni aliquam dolorum esse, fuga maxime dolore perspiciatis tempora quam officiis cum suscipit velit dolores commodi a beatae quis.</p>
+                        <div class="buttons">
+                            <button class="edit-btn">Изменить</button>
+                            <button class="delete-btn">Удалить</button>
+                        </div>
+                    </div>
+                </div>
+                
+                
+        </div>
+        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+        <script type="module" src="/js/teachersPageCharts.js"></script>
+        <script src="/js/toggle.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+        <script src="https://cdn.datatables.net/buttons/3.0.1/js/dataTables.buttons.js"></script>
+        <script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.dataTables.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+        <script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js"></script>
+        <script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.print.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+        <script src="/js/teachersPageSparkCharts.js"></script>
+        <script src="/js/editableTable.js"></script>
+    </body>
+</html>
