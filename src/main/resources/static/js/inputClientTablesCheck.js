@@ -1,3 +1,9 @@
+// Функция для проверки ввода только буквенных символов
+function isValidNameInput(input) {
+    const namePattern = /^[a-zA-Zа-яА-ЯёЁ]+$/; // Регулярное выражение для проверки только букв
+    return namePattern.test(input);
+}
+
 // Функция для создания уведомлений
 function createToast(type, icon, title, text) {
     let notifications = document.querySelector('.notifications');
@@ -24,7 +30,7 @@ const surnameInput = document.getElementById('surnameAdd');
 const emailInput = document.getElementById('emailAdd');
 
 // Получение ссылки на форму
-const addClientForm = document.getElementById('addClientForm');
+const addClientForm = document.getElementById('addModal').querySelector('form');
 
 // Обработчик события отправки формы
 addClientForm.addEventListener('submit', function(event) {
@@ -36,14 +42,18 @@ addClientForm.addEventListener('submit', function(event) {
         return;
     }
 
+    // Проверка валидности имени, фамилии и отчества
+    if (!isValidNameInput(firstNameInput.value.trim()) || !isValidNameInput(lastNameInput.value.trim()) || !isValidNameInput(surnameInput.value.trim())) {
+        createToast('error', 'fa-solid fa-circle-exclamation', 'Error', 'Name, Last Name, and Surname should contain only letters!');
+        return;
+    }
+
     // Проверка валидности email
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(emailInput.value.trim())) {
         createToast('error', 'fa-solid fa-circle-exclamation', 'Error', 'Invalid email format!');
         return;
     }
-
-    // Остальные проверки...
 
     this.submit();
 });

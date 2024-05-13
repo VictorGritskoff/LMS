@@ -4,6 +4,7 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 @Entity
@@ -27,6 +28,9 @@ public class Teacher {
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "salary")
+    private BigDecimal salary;
 
     @Column(name = "image_path")
     private String imagePath;
