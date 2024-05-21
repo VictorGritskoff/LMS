@@ -1,9 +1,9 @@
 var options = {
     series: [{
-    name: 'Income',
+    name: 'Прибыль',
     data: [31, 40, 28, 51, 42, 109, 100]
   }, {
-    name: 'Expenses',
+    name: 'Убытки',
     data: [11, 32, 45, 32, 34, 52, 41]
   }],
     chart: {

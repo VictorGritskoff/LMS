@@ -1,6 +1,6 @@
 var options = {
     series: [{
-      name: "Desktops",
+      name: "Клиенты",
       data: [10, 41, 35, 51, 49, 62, 69, 91, 148]
   }],
     chart: {
@@ -17,7 +17,7 @@ var options = {
     curve: 'straight'
   },
   title: {
-    text: 'Total Customers Amount',
+    text: 'Количество клиентов',
     align: 'left'
   },
   grid: {

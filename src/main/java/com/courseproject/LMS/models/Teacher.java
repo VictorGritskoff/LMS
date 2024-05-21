@@ -36,6 +36,7 @@ public class Teacher {
     private String imagePath;
 
     @OneToMany(mappedBy = "teacher")
+    @Transient
     private List<Course> courses;
 
 }

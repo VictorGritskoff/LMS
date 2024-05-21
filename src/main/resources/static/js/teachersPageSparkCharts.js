@@ -37,7 +37,7 @@ window.Apex = {
       }
     },
     title: {
-      text: '$439   Sales Last Month',
+      text: '$439   Продажи за месяц',
       style: {
         fontSize: '20px'
       }
@@ -78,7 +78,7 @@ window.Apex = {
       }
     },
     title: {
-      text: '$387    Wage Costs',
+      text: '$387    Зарплаты',
       style: {
         fontSize: '20px'
       }
@@ -120,7 +120,7 @@ window.Apex = {
     },
     colors: ['#f4516c'],
     title: {
-      text: '$577    Last Year Sales',
+      text: '$577    Продажи за год',
       style: {
         fontSize: '20px'
       }
@@ -166,7 +166,7 @@ window.Apex = {
     },
     colors: ['#00c5dc'],
     title: {
-      text: '$615      Total Revenue',
+      text: '$615      Оборот',
       style: {
         fontSize: '20px'
       }

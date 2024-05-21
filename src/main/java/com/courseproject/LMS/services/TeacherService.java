@@ -26,5 +26,4 @@ public class TeacherService {
     public void deleteById(int id) {
         teacherRepository.deleteById(id);
     }
-
 }

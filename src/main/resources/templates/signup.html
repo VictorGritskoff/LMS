@@ -14,33 +14,33 @@
 <div class="container">
     <div class="blueBg">
         <div class="box signin">
-            <h2>Already Have an Account?</h2>
-            <button class="signinBtn">Sign In</button>
+            <h2>Уже есть аккаунт?</h2>
+            <button class="signinBtn">Войти</button>
         </div>
         <div class="box signup">
-            <h2>Don't Have an Account?</h2>
-            <button class="signupBtn">Sign Up</button>
+            <h2>Нет аккаунта?</h2>
+            <button class="signupBtn">Зарегистрироваться</button>
         </div>
     </div>
     <div class="formBx">
         <div class="form signinForm">
             <form action="/login" method="post" id="authForm">
                 <h3>Sign In</h3>
-                <input type="text" name="username" placeholder="Username">
-                <input type="password" name="password" placeholder="Password">
+                <input type="text" name="username" placeholder="Имя пользователя">
+                <input type="password" name="password" placeholder="Пароль">
                 <input type="submit" value="Login" onclick="loginUser(event)">
-                <a href="#" class="forgot">Forgot Password</a>
+                <a href="#" class="forgot">Забыли пароль?</a>
             </form>
         </div>
         <div class="form signupForm">
             <form action="/register/user" method="post" id="registerForm">
                 <h3>Sign Up</h3>
-                <input type="text" name="new_username" placeholder="Username">
-                <input type="text" name="firstName" placeholder="First Name">
-                <input type="text" name="lastName" placeholder="Last Name">
-                <input type="email" name="email" placeholder="Email Address">
-                <input type="password" name="new_password" placeholder="Password">
-                <input type="password" name="confirmPassword" placeholder="Confirm Password">
+                <input type="text" name="new_username" placeholder="Имя пользователя">
+                <input type="text" name="firstName" placeholder="Имя">
+                <input type="text" name="lastName" placeholder="Фамилия">
+                <input type="password" name="surname" placeholder="Отчетство">
+                <input type="email" name="email" placeholder="Эл. почта">
+                <input type="password" name="new_password" placeholder="Пароль">
                 <input type="submit" value="Register" onclick="registerUser(event)">
             </form>
         </div>

@@ -6,10 +6,13 @@
     <meta http-equiv="X-UA-Compatible" content="ie-edge">
     <title>Skillify</title>
     <link rel="icon" type="image/png" href="/icons/shrek.ico">
+    <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
     <link rel="stylesheet" href="/style.css">
+    <link rel="stylesheet" href="/css/notifications.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
-<div class="container">
     <div class="navigation">
         <ul>
             <li>
@@ -81,7 +84,6 @@
             <div class="toggle">
                 <ion-icon name="menu-outline"></ion-icon>
             </div>
-
             <!-- user image -->
             <div class="user">
                 <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
@@ -89,149 +91,205 @@
         </div>
 
         <!-- body -->
-        <h1 class="p-relative">Courses</h1>
-        <div class="courses-page d-grid m-20 gap-20">
-            <div class="course bg-white rad-6 p-relative">
-                <img decoding="async" class="cover" src="img/artificial-intelligence-3382507_1280.jpg" alt="" />
-                <div class="p-20">
-                    <h4 class="m-0">Mastering Web Design</h4>
-                    <p class="description c-grey mt-15 fs-14">
-                        Master The Art Of Web Designing And Mocking, Prototyping And Creating Web Design Architecture
-                    </p>
-                </div>
-                <div class="info p-15 p-relative between-flex">
-                    <span class="title bg-blue c-white btn-shape">Course Info</span>
-                    <span class="c-grey">
-                        <ion-icon name="person-outline"></ion-icon>
-                        950
-                    </span>
-                    <span class="c-grey-dollar">
-                        &#36;
-                        165
-                    </span>
-                </div>
-            </div>
-            
-            <div class="course bg-white rad-6 p-relative">
-                <img decoding="async" class="cover" src="img/code-1839406_1280.jpg" alt="" />
-                <div class="p-20">
-                    <h4 class="m-0">Data Structure And Algorithms</h4>
-                    <p class="description c-grey mt-15 fs-14">
-                        Master The Art Of Data Strcuture And Famous Algorithms Like Sorting, Dividing And Conquering
-                    </p>
-                </div>
-                <div class="info p-15 p-relative between-flex">
-                    <span class="title bg-blue c-white btn-shape">Course Info</span>
-                    <span class="c-grey"> <ion-icon name="person-outline"></ion-icon> 115</span>
-                    <span class="c-grey-dollar">&#36; 210</span>
-                </div>
-            </div>
-            <div class="course bg-white rad-6 p-relative">
-                <img decoding="async" class="cover" src="img/computer-1185569_1280.jpg" alt="" />
-                <div class="p-20">
-                    <h4 class="m-0">Responsive Web Design</h4>
-                    <p class="description c-grey mt-15 fs-14">
-                        Mastering Responsive Web Design And Media Queries And Know Everything About Breakpoints
-                    </p>
-                </div>
-                <div class="info p-15 p-relative between-flex">
-                    <span class="title bg-blue c-white btn-shape">Course Info</span>
-                    <span class="c-grey"> <ion-icon name="person-outline"></ion-icon> 650</span>
-                    <span class="c-grey-dollar">&#36; 90</span>
-                </div>
-            </div>
-            
-          <div class="course bg-white rad-6 p-relative">
-            <img decoding="async" class="cover" src="img/cyber-security-3374252_1280.jpg" alt="" />
-            <div class="p-20">
-              <h4 class="m-0">Mastering Python</h4>
-              <p class="description c-grey mt-15 fs-14">
-                Mastering Python To Prepare For Data Science And AI And Automating Things in Your Life
-              </p>
-            </div>
-            <div class="info p-15 p-relative between-flex">
-              <span class="title bg-blue c-white btn-shape">Course Info</span>
-              <span class="c-grey"> <ion-icon name="person-outline"></ion-icon> 650</span>
-                    <span class="c-grey-dollar">&#36; 90</span>
-            </div>
-          </div>
-          <div class="course bg-white rad-6 p-relative">
-            <img decoding="async" class="cover" src="img/monitor-1307227_1280.jpg" alt="" />
-            <div class="p-20">
-              <h4 class="m-0">PHP Examples</h4>
-              <p class="description c-grey mt-15 fs-14">
-                PHP Tutorials And Examples And Practice On Web Application And Connecting With Databases
-              </p>
-            </div>
-            <div class="info p-15 p-relative between-flex">
-              <span class="title bg-blue c-white btn-shape">Course Info</span>
-              <span class="c-grey"> <ion-icon name="person-outline"></ion-icon> 650</span>
-                    <span class="c-grey-dollar">&#36; 90</span>
-            </div>
-          </div>
-          <div class="course bg-white rad-6 p-relative">
-            <img decoding="async" class="cover" src="img/programming-1857236_1280.jpg" alt="" />
-            <div class="p-20">
-              <h4 class="m-0">Data Structure And Algorithms</h4>
-              <p class="description c-grey mt-15 fs-14">
-                Master The Art Of Data Strcuture And Famous Algorithms Like Sorting, Dividing And Conquering
-              </p>
-            </div>
-            <div class="info p-15 p-relative between-flex">
-              <span class="title bg-blue c-white btn-shape">Course Info</span>
-              <span class="c-grey"> <ion-icon name="person-outline"></ion-icon> 650</span>
-                    <span class="c-grey-dollar">&#36; 90</span>
-            </div>
-          </div>
-          <div class="course bg-white rad-6 p-relative">
-            <img decoding="async" class="cover" src="img/code-1839406_1280.jpg" alt="" />
-            <div class="p-20">
-              <h4 class="m-0">Responsive Web Design</h4>
-              <p class="description c-grey mt-15 fs-14">
-                Mastering Responsive Web Design And Media Queries And Know Everything About Breakpoints
-              </p>
-            </div>
-            <div class="info p-15 p-relative between-flex">
-              <span class="title bg-blue c-white btn-shape">Course Info</span>
-              <span class="c-grey"> <ion-icon name="person-outline"></ion-icon> 650</span>
-                    <span class="c-grey-dollar">&#36; 90</span>
-            </div>
-          </div>
-          <div class="course bg-white rad-6 p-relative">
-            <img decoding="async" class="cover" src="img/monitor-1307227_1280.jpg" alt="" />
-            <div class="p-20">
-              <h4 class="m-0">Mastering Web Design</h4>
-              <p class="description c-grey mt-15 fs-14">
-                Master The Art Of Web Designing And Mocking, Prototyping And Creating Web Design Archticture
-              </p>
-            </div>
-            <div class="info p-15 p-relative between-flex">
-              <span class="title bg-blue c-white btn-shape">Course Info</span>
-              <span class="c-grey"> <ion-icon name="person-outline"></ion-icon> 650</span>
-                    <span class="c-grey-dollar">&#36; 90</span>
-            </div>
-          </div>
-          <div class="course bg-white rad-6 p-relative">
-            <img decoding="async" class="cover" src="img/cyber-security-3374252_1280.jpg" alt="" />
-            <div class="p-20">
-              <h4 class="m-0">PHP Examples</h4>
-              <p class="description c-grey mt-15 fs-14">
-                PHP Tutorials And Examples And Practice On Web Application And Connecting With Databases
-              </p>
-            </div>
-            <div class="info p-15 p-relative between-flex">
-              <span class="title bg-blue c-white btn-shape">Course Info</span>
-              <span class="c-grey"> <ion-icon name="person-outline"></ion-icon> 650</span>
-                    <span class="c-grey-dollar">&#36; 90</span>
-            </div>
-          </div>
 
+        <!-- teachers table -->
+        <div class="teachers-container">
+            <h1>Онлайн-курсы</h1>
+            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">Добавить онлайн-курс</button>
+            <table id= "example" class="teachers-table" style="width: 100%">
+                <thead>
+                <tr>
+                    <th>Id</th>
+                    <th>Название</th>
+                    <th>Преподаватель</th>
+                    <th>Цена</th>
+                    <th>Действия</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="course:${courses}">
+                    <td th:text="${course.courseId}"></td>
+                    <td th:text="${course.name}"></td>
+                    <td th:text="${course.teacher.surname}"></td>
+                    <td th:text="${course.price}"></td>
+                    <td>
+                        <div class="btn-group">
+                            <a th:href="@{/courses/findById(id=${course.courseId})}" class="btn btn-success" id="editButton"><ion-icon name="pencil-outline"></ion-icon></a>
+                            <a th:href="@{/courses/findById(id=${course.courseId})}" class="btn btn-warning" id="viewButton"><ion-icon name="reader-outline"></ion-icon></a>
+                            <a th:href="@{/courses/delete(id=${course.courseId})}" class="btn btn-danger" id="deleteButton"><ion-icon name="trash-outline"></ion-icon></a>
+                        </div>
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+
+        <!-- ADD MODAL -->
+        <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Добавление нового преподавателя</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/courses/addNew}" method="post" id="addTeacherForm">
+                            <div class="form-group">
+                                <label for="courseNameAdd" class="col-form-label">Название курса:</label>
+                                <input type="text" class="form-control" id="courseNameAdd" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="courseTeacherAdd" class="col-form-label">Преподаватель:</label>
+                                <select class="form-control" id="courseTeacherAdd" name="teacher">
+                                    <option>--ВЫБРАТЬ--</option>
+                                    <option th:each="teacher : ${teachers}"
+                                            th:value="${teacher.teacherId}"
+                                            th:text="${teacher.surname}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="priceAdd" class="col-form-label">Цена курса (руб):</label>
+                                <input type="text" class="form-control" id="priceAdd" name="price">
+                            </div>
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- UPDATE MODAL -->
+        <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="">Изменение данных онлайн-курса</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/courses/update}" method="post" id="updateCoursesForm">
+                            <div class="form-group">
+                                <label for="courseNameEdit" class="col-form-label">Название курса:</label>
+                                <input type="text" class="form-control" id="courseNameEdit" name="name">
+                            </div>
+                            <div class="form-group">
+                                <label for="courseTeacherEdit" class="col-form-label">Преподаватель:</label>
+                                <select class="form-control" id="courseTeacherEdit" name="teacher">
+                                    <option>--ВЫБРАТЬ--</option>
+                                    <option th:each="teacher : ${teachers}"
+                                            th:value="${teacher.teacherId}"
+                                            th:text="${teacher.surname}">
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="form-group">
+                                <label for="priceEdit" class="col-form-label">Цена курса (руб):</label>
+                                <input type="text" class="form-control" id="priceEdit" name="price">
+                            </div>
+                            <!-- Скрытое поле для идентификатора клиента -->
+                            <input type="hidden" id="idUpdate" name="id">
+                            <!-- Скрытое поле для указания метода запроса как PUT -->
+                            <input type="hidden" name="_method" value="put">
+                            <div class="form-group">
+                                <button type="submit" class="btn btn-primary">Сохранить</button>
+                            </div>
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- VIEW MODAL -->
+        <div class="modal fade" id="viewModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="view">Изменение данных онлайн-курса</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <form th:action="@{/courses/update}" method="post" id="viewCoursesForm">
+                            <div class="form-group">
+                                <label for="courseNameView" class="col-form-label">Название курса:</label>
+                                <input type="text" class="form-control" id="courseNameView" name="name" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="courseNameView" class="col-form-label">Преподаватель:</label>
+                                <input type="text" class="form-control" id="courseTeacherView" name="name" readonly>
+                            </div>
+                            <div class="form-group">
+                                <label for="priceView" class="col-form-label">Цена курса (руб):</label>
+                                <input type="text" class="form-control" id="priceView" name="price" readonly>
+                            </div>
+                            <!-- Скрытое поле для идентификатора клиента -->
+                            <input type="hidden" id="idView" name="id">
+                            <!-- Скрытое поле для указания метода запроса как PUT -->
+                            <input type="hidden" name="_method" value="put">
+                        </form>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Отмена</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- DELETE MODAL -->
+        <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
+            <div class="modal-dialog modal-dialog-centered" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLongTitle">Предупреждение об удалении</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <p>Вы уверены, что нужно удалить данный онлайн-курс из базы данных?</p>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>
+                        <a class="btn btn-primary" id="confirmedDeleteButton" href="">Да</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
-</div>
 
-<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-<script src="/js/toggle.js"></script>
+    <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+    <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
+    <script type="module" src="/js/teachersPageCharts.js"></script>
+    <script src="/js/toggle.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+    <script src="https://cdn.datatables.net/2.0.3/js/dataTables.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.1/js/dataTables.buttons.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.dataTables.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.10.1/jszip.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/pdfmake.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.2.7/vfs_fonts.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js"></script>
+    <script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.print.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
+    <script src="/js/courseButtons.js"></script>
+    <script src="/js/downloadTableButtons.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+
 </body>
 </html>
