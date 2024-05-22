@@ -46,7 +46,7 @@
                 </a>
             </li>
             <li>
-                <a th:href="@{/invoices}">
+                <a th:href="@{/orders}">
                     <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
                     <span class="title"> Заказы</span>
                 </a>
@@ -92,7 +92,7 @@
 
         <!-- body -->
 
-        <!-- teachers table -->
+        <!-- courses table -->
         <div class="teachers-container">
             <h1>Онлайн-курсы</h1>
             <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">Добавить онлайн-курс</button>
@@ -185,7 +185,6 @@
                             <div class="form-group">
                                 <label for="courseTeacherEdit" class="col-form-label">Преподаватель:</label>
                                 <select class="form-control" id="courseTeacherEdit" name="teacher">
-                                    <option>--ВЫБРАТЬ--</option>
                                     <option th:each="teacher : ${teachers}"
                                             th:value="${teacher.teacherId}"
                                             th:text="${teacher.surname}">

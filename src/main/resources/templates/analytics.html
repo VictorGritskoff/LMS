@@ -42,7 +42,7 @@
                 </a>
             </li>
             <li>
-                <a th:href="@{/invoices}">
+                <a th:href="@{/orders}">
                     <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
                     <span class="title"> Заказы</span>
                 </a>
@@ -86,6 +86,7 @@
                         <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
                     </div>
                 </div>
+                <h1 class="p-relative">Аналитика</h1>
                 <!-- charts -->
                 <div class="charts" id="charts-container">
                     <div class="charts-grid" id="charts-grid">
@@ -113,14 +114,15 @@
                 </div>
 
                 <!-- total revenue chart-->
-                <h1 class="p-relative">Аналитика</h1>
                 <div class="customers-details">
                     <div class="customers-box">
+                        <h2>Количество клиентов</h2>
                         <div id="chart">
                             <div id="customers-count-chart"></div>
                         </div>
                     </div>
                     <div class="customers-activity-box">
+                        <h2>Ожидаемое количество клиентов</h2>
                         <div id="activity-chart">
                             <div id="customers-activity-chart"></div>
                         </div>

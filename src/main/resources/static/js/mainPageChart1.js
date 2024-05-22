@@ -3,11 +3,11 @@ var dates = [
   { x: new Date('2024-02-01').getTime(), y: 1600 },
   { x: new Date('2024-03-01').getTime(), y: 1700 },
   { x: new Date('2024-04-01').getTime(), y: 1800 },
-  { x: new Date('2024-05-01').getTime(), y: 1750 }, // новый элемент данных
-  { x: new Date('2024-06-01').getTime(), y: 1850 }, // новый элемент данных
-  { x: new Date('2024-07-01').getTime(), y: 1900 }, // новый элемент данных
-  { x: new Date('2024-08-01').getTime(), y: 1950 }, // новый элемент данных
-  { x: new Date('2024-09-01').getTime(), y: 2000 }  // новый элемент данных
+  { x: new Date('2024-05-01').getTime(), y: 1750 },
+  { x: new Date('2024-06-01').getTime(), y: 1850 },
+  { x: new Date('2024-07-01').getTime(), y: 1900 },
+  { x: new Date('2024-08-01').getTime(), y: 1950 },
+  { x: new Date('2024-09-01').getTime(), y: 2000 }
 ];
 
 
@@ -36,7 +36,7 @@ var options = {
     size: 0,
   },
   title: {
-    text: 'Earnings $ In This Year',
+    text: 'Прибыль (руб) в этом году',
     align: 'center',
     style: {
       fontSize: '26px'

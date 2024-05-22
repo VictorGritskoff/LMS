@@ -1,5 +1,5 @@
 <!DOCTYPE html>
-<html lang = "en">
+<html lang="en">
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -18,61 +18,61 @@
     <li>
       <a href="#">
         <span class="icon"><ion-icon name="school-outline"></ion-icon></span>
-        <span class="title"> SKILLIFY</span>
+        <span class="title">SKILLIFY</span>
       </a>
     </li>
     <li>
       <a th:href="@{/home}">
         <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-        <span class="title"> Главная</span>
+        <span class="title">Главная</span>
       </a>
     </li>
     <li>
       <a th:href="@{/customers}">
         <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
-        <span class="title"> Клиенты</span>
+        <span class="title">Клиенты</span>
       </a>
     </li>
     <li>
       <a th:href="@{/courses}">
         <span class="icon"><ion-icon name="document-outline"></ion-icon></span>
-        <span class="title"> Курсы</span>
+        <span class="title">Курсы</span>
       </a>
     </li>
     <li>
       <a th:href="@{/teachers}">
         <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
-        <span class="title"> Преподаватели</span>
+        <span class="title">Преподаватели</span>
       </a>
     </li>
     <li class="active">
       <a th:href="@{/orders}">
         <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
-        <span class="title"> Заказы</span>
+        <span class="title">Заказы</span>
       </a>
     </li>
     <li>
       <a th:href="@{/analytics}">
         <span class="icon"><ion-icon name="podium-outline"></ion-icon></span>
-        <span class="title"> Аналитика</span>
+        <span class="title">Аналитика</span>
       </a>
     </li>
     <li>
       <a th:href="@{/settings}">
         <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
-        <span class="title"> Настройки</span>
+        <span class="title">Настройки</span>
       </a>
     </li>
     <li>
       <a href="#">
         <span class="icon"><ion-icon name="information-circle-outline"></ion-icon></span>
-        <span class="title"> Помощь</span>
+        <span class="title">Помощь</span>
       </a>
     </li>
     <li>
       <a href="signup.html">
         <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
-        <span class="title"> Выход</span>
+        <span class="title">Выход</span>
       </a>
     </li>
   </ul>
@@ -92,29 +92,27 @@
   </div>
   <div class="customers-container">
     <h1>Заказы</h1>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">Добавить клиента</button>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">Добавить заказ</button>
     <table id="example" class="customers-table">
       <thead>
       <tr>
         <th>Id</th>
-        <th>Имя</th>
-        <th>Отчество</th>
-        <th>Фамилия</th>
-        <th>Эл. почта</th>
+        <th>Имя клиента</th>
+        <th>Курс</th>
+        <th>Цена</th>
         <th>Действия</th>
       </tr>
       </thead>
       <tbody>
-      <tr th:each="client:${customers}">
-        <td th:text="${client.clientId}"></td>
-        <td th:text="${client.firstName}"></td>
-        <td th:text="${client.lastName}"></td>
-        <td th:text="${client.surname}"></td>
-        <td th:text="${client.email}"></td>
+      <tr th:each="order : ${orders}">
+        <td th:text="${order.orderId}"></td>
+        <td th:text="${order.client.surname}"></td>
+        <td th:text="${order.course.name}"></td>
+        <td th:text="${order.orderPrice}"></td>
         <td>
           <div class="btn-group">
-            <a th:href="@{/customers/findById(id=${client.clientId})}" class="btn btn-success" id="editButton"><ion-icon name="pencil-outline"></ion-icon></a>
-            <a th:href="@{/customers/delete(id=${client.clientId})}" class="btn btn-danger" id="deleteButton"><ion-icon name="trash-outline"></ion-icon></a>
+            <a th:href="@{/orders/findById(id=${order.orderId})}" class="btn btn-success" id="editButton"><ion-icon name="pencil-outline"></ion-icon></a>
+            <a th:href="@{/orders/delete(id=${order.orderId})}" class="btn btn-danger" id="deleteButton"><ion-icon name="trash-outline"></ion-icon></a>
           </div>
         </td>
       </tr>
@@ -128,28 +126,36 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Добавление нового клиента</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Добавление нового заказа</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/customers/addNew}" method="post" id="addClientForm">
+        <form th:action="@{/orders/addNew}" method="post" id="addClientForm">
           <div class="form-group">
-            <label for="firstNameAdd" class="col-form-label">Имя клиента:</label>
-            <input type="text" class="form-control" id="firstNameAdd" name="firstName">
+            <label for="orderClient" class="col-form-label">Клиент:</label>
+            <select class="form-control" id="orderClient" name="client">
+              <option>--ВЫБРАТЬ--</option>
+              <option th:each="client : ${customers}"
+                      th:value="${client.clientId}"
+                      th:text="${client.surname}">
+              </option>
+            </select>
           </div>
           <div class="form-group">
-            <label for="lastNameAdd" class="col-form-label">Отчество клиента:</label>
-            <input type="text" class="form-control" id="lastNameAdd" name="lastName">
+            <label for="orderCourse" class="col-form-label">Курс:</label>
+            <select class="form-control" id="orderCourse" name="course">
+              <option>--ВЫБРАТЬ--</option>
+              <option th:each="course : ${courses}"
+                      th:value="${course.courseId}"
+                      th:text="${course.name}">
+              </option>
+            </select>
           </div>
           <div class="form-group">
-            <label for="surnameAdd" class="col-form-label">Фамилия клиента:</label>
-            <input type="text" class="form-control" id="surnameAdd" name="surname">
-          </div>
-          <div class="form-group">
-            <label for="emailAdd" class="col-form-label">Электронная почта:</label>
-            <input type="text" class="form-control" id="emailAdd" name="email">
+            <label for="orderPrice" class="col-form-label">Сумма заказа:</label>
+            <input type="text" class="form-control" id="orderPrice" name="orderPrice">
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Сохранить</button>
@@ -168,28 +174,34 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="">Изменение данных клиента</h5>
+        <h5 class="modal-title" id="">Изменение данных заказа</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/customers/update}" th:method="post">
+        <form th:action="@{/orders/update}" th:method="post">
           <div class="form-group">
-            <label for="nameEdit" class="col-form-label">Имя клиента:</label>
-            <input type="text" class="form-control" id="nameEdit" name="firstName">
+            <label for="orderClientUpdate" class="col-form-label">Клиент:</label>
+            <select class="form-control" id="orderClientUpdate" name="orderClientUpdate">
+              <option th:each="client : ${customers}"
+                      th:value="${client.clientId}"
+                      th:text="${client.surname}">
+              </option>
+            </select>
           </div>
           <div class="form-group">
-            <label for="lastNameEdit" class="col-form-label">Отчество клиента:</label>
-            <input type="text" class="form-control" id="lastNameEdit" name="lastName">
+            <label for="orderCourseUpdate" class="col-form-label">Курс:</label>
+            <select class="form-control" id="orderCourseUpdate" name="orderCourseUpdate">
+              <option th:each="course : ${courses}"
+                      th:value="${course.courseId}"
+                      th:text="${course.name}">
+              </option>
+            </select>
           </div>
           <div class="form-group">
-            <label for="surnameEdit" class="col-form-label">Фамилия клиента:</label>
-            <input type="text" class="form-control" id="surnameEdit" name="surname">
-          </div>
-          <div class="form-group">
-            <label for="emailEdit" class="col-form-label">Электронная почта:</label>
-            <input type="text" class="form-control" id="emailEdit" name="email">
+            <label for="orderPriceUpdate" class="col-form-label">Сумма заказа:</label>
+            <input type="text" class="form-control" id="orderPriceUpdate" name="orderPriceUpdate">
           </div>
           <!-- Скрытое поле для идентификатора клиента -->
           <input type="hidden" id="idEdit" name="id">
@@ -207,7 +219,6 @@
   </div>
 </div>
 
-
 <!-- DELETE MODAL -->
 <div class="modal fade" id="deleteModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalCenterTitle" aria-hidden="true">
   <div class="modal-dialog modal-dialog-centered" role="document">
@@ -219,7 +230,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Вы уверены, что нужно удалить данного клиента из базы данных?</p>
+        <p>Вы уверены, что нужно удалить данный заказ из базы данных?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>
@@ -228,6 +239,7 @@
     </div>
   </div>
 </div>
+
 <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
 <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
 <script src="/js/toggle.js"></script>
@@ -241,9 +253,8 @@
 <script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.print.min.js"></script>
 <script src="/js/downloadTableButtons.js"></script>
-<script src="/js/clientButtons.js"></script>
-<script src="/js/inputClientTablesCheck.js"></script>
-<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
+<script src="/js/orderButtons.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDzwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
 </body>
 </html>

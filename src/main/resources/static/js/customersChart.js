@@ -17,8 +17,7 @@ var options = {
     curve: 'straight'
   },
   title: {
-    text: 'Количество клиентов',
-    align: 'left'
+    enabled: false
   },
   grid: {
     row: {

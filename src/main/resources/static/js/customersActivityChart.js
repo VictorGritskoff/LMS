@@ -110,8 +110,7 @@ var options = {
     type: 'bar'
   },
   title: {
-    text: 'Количество клиентов',
-    align: 'left'
+    enabled: false
   },
   plotOptions: {
     bar: {

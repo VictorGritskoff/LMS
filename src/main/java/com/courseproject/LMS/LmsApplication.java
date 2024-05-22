@@ -8,7 +8,7 @@ public class LmsApplication {
 	//TODO edit/delete на пагинации
 	//TODO уведомления на авторизации
 	//TODO уведомления на модалах
-	//TODO Surname на VIEW MODAL в COURSES
+	//TODO проверки на различных формах ввода в таблицах
 	public static void main(String[] args) {
 		SpringApplication.run(LmsApplication.class, args);
 	}

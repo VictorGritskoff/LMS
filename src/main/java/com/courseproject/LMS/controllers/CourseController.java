@@ -19,7 +19,7 @@ public class CourseController {
     @Autowired
     private TeacherService teacherService;
     @GetMapping("/courses")
-    public String getTeachers(Model model){
+    public String getCourses(Model model){
         List<Teacher> teacherList = teacherService.getTeachers();
         List<Course> courseList = courseService.getCourses();
         model.addAttribute("teachers", teacherList);

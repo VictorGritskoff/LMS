@@ -28,4 +28,8 @@ public class CourseService {
     public void deleteById(int id) {
         courseRepository.deleteById(id);
     }
+
+    public Course getCourseById(int courseId) {
+        return courseRepository.getById(courseId);
+    }
 }

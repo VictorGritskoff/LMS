@@ -27,4 +27,8 @@ public class ClientService {
     public void deleteById(int id) {
         clientRepository.deleteById(id);
     }
+
+    public Client getClientById(int clientId) {
+        return clientRepository.getById(clientId);
+    }
 }
