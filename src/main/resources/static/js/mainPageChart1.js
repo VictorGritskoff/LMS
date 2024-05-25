@@ -1,22 +1,53 @@
-var dates = [
-  { x: new Date('2024-01-01').getTime(), y: 1500 },
-  { x: new Date('2024-02-01').getTime(), y: 1600 },
-  { x: new Date('2024-03-01').getTime(), y: 1700 },
-  { x: new Date('2024-04-01').getTime(), y: 1800 },
-  { x: new Date('2024-05-01').getTime(), y: 1750 },
-  { x: new Date('2024-06-01').getTime(), y: 1850 },
-  { x: new Date('2024-07-01').getTime(), y: 1900 },
-  { x: new Date('2024-08-01').getTime(), y: 1950 },
-  { x: new Date('2024-09-01').getTime(), y: 2000 }
+var profitData = [
+  { orderTime: '2024-01-01', profit: 100 },
+  { orderTime: '2024-02-01', profit: 250 },
+  { orderTime: '2024-03-01', profit: 350 },
+  { orderTime: '2024-04-01', profit: 600 },
 ];
 
+function fillMissingMonths(profitData) {
+  var profitByMonth = new Map();
+
+  profitData.forEach(function(item) {
+    var orderDate = new Date(item.orderTime);
+    var month = orderDate.getMonth() + 1;
+    var year = orderDate.getFullYear();
+    var key = year + '-' + month;
+
+    if (profitByMonth.has(key)) {
+      profitByMonth.get(key).profit += item.profit;
+    } else {
+      profitByMonth.set(key, { orderTime: year + '-' + month, profit: item.profit });
+    }
+  });
+
+  var filledProfitData = [];
+  for (var monthIndex = 1; monthIndex <= 4; monthIndex++) {
+    var key = '2024-' + monthIndex;
+    var monthData = profitByMonth.get(key);
+    if (monthData) {
+      filledProfitData.push(monthData);
+    } else {
+      filledProfitData.push({ orderTime: key, profit: 0 });
+    }
+  }
+
+  return filledProfitData;
+}
+
+var filledProfitData = fillMissingMonths(profitData);
+
+var dates = filledProfitData.map(item => ({
+  x: new Date(item.orderTime).getTime(),
+  y: item.profit
+}));
 
 var options = {
-    series: [{
-    name: 'Earnings',
+  series: [{
+    name: 'Прибыль',
     data: dates
   }],
-    chart: {
+  chart: {
     type: 'area',
     stacked: false,
     height: 310,
@@ -54,12 +85,12 @@ var options = {
   },
   yaxis: {
     labels: {
-      formatter: function (val) {
+      formatter: function(val) {
         return val.toFixed(0);
       },
     },
     title: {
-      text: 'Price',
+      text: 'Доход',
       style: {
         fontSize: '16px'
       }
@@ -67,16 +98,28 @@ var options = {
   },
   xaxis: {
     type: 'datetime',
-  },
-  tooltip: {
-    shared: false,
-    y: {
-      formatter: function (val) {
-        return val.toFixed(0);
+    labels: {
+      datetimeFormatter: {
+        year: 'yyyy',
+        month: 'MMM',
+        day: 'dd'
       }
     }
+  },
+  tooltip: {
+    x: {
+      formatter: function(val) {
+        return new Date(val).toLocaleDateString('ru-RU');
+      }
+    },
+    y: {
+      formatter: function(val) {
+        return val.toFixed(0);
+      }
+    },
+    shared: false
   }
-  };
+};
 
-  var chart = new ApexCharts(document.querySelector("#main-page-earnings-chart"), options);
-  chart.render();
+var chart = new ApexCharts(document.querySelector("#main-page-earnings-chart"), options);
+chart.render();

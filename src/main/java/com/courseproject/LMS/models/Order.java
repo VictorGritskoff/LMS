@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -28,7 +30,15 @@ public class Order {
     @Column(name = "order_price")
     private double orderPrice;
 
+    @Column(name = "order_time")
+    private LocalDateTime orderTime;
+
     @Enumerated(EnumType.STRING)
     @Column(name = "status")
     private OrderStatus status;
+
+    @PrePersist
+    protected void onCreate() {
+        orderTime = LocalDateTime.now();
+    }
 }

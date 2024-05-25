@@ -18,9 +18,6 @@ public class TeacherController {
     @GetMapping("/teachers")
     public String getTeachers(Model model){
         List<Teacher> teacherList = teacherService.getTeachers();
-        for (Teacher c : teacherList) {
-            System.out.println(c);
-        }
         model.addAttribute("teachers", teacherList);
         return "teachers";
     }

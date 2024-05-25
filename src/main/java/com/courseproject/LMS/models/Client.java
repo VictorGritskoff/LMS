@@ -4,6 +4,8 @@ import jakarta.persistence.*;
 import lombok.Getter;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
+
 @Entity
 @Getter
 @Setter
@@ -25,4 +27,12 @@ public class Client {
 
     @Column(name = "email")
     private String email;
+
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
+
+    @PrePersist
+    protected void onCreate() {
+        creationDate = LocalDateTime.now();
+    }
 }

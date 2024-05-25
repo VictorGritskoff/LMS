@@ -9,6 +9,8 @@ public class LmsApplication {
 	//TODO уведомления на авторизации
 	//TODO уведомления на модалах
 	//TODO проверки на различных формах ввода в таблицах
+	//TODO проверить даты на оси y в mainPageChart
+	//TODO HELP
 	public static void main(String[] args) {
 		SpringApplication.run(LmsApplication.class, args);
 	}

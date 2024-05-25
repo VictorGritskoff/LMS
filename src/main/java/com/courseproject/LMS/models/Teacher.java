@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 
 @Entity
@@ -39,4 +40,11 @@ public class Teacher {
     @Transient
     private List<Course> courses;
 
+    @Column(name = "creation_date")
+    private LocalDateTime creationDate;
+
+    @PrePersist
+    protected void onCreate() {
+        creationDate = LocalDateTime.now();
+    }
 }

@@ -32,4 +32,7 @@ public class CourseService {
     public Course getCourseById(int courseId) {
         return courseRepository.getById(courseId);
     }
+    public int getCourseCount() {
+        return courseRepository.findAll().size();
+    }
 }

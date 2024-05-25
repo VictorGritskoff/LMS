@@ -26,4 +26,7 @@ public class TeacherService {
     public void deleteById(int id) {
         teacherRepository.deleteById(id);
     }
+    public int getTeacherCount() {
+        return teacherRepository.findAll().size();
+    }
 }

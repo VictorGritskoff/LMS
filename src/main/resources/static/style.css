@@ -284,6 +284,7 @@ body
     grid-template-columns: 2fr 1fr;
     grid-gap: 30px;
     margin-top: 10px;
+    text-align: center;
 }
 .details .recentOrders
 {
@@ -294,6 +295,7 @@ body
     padding: 20px;
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
     border-radius: 20px;
+    text-align: center;
 }
 .cardHeader
 {
@@ -321,39 +323,33 @@ body
     width: 100%;
     border-collapse: collapse;
     margin-top: -60px;
+    text-align: center;
 }
 .details table thead td
 {
     font-weight: 600;
+    text-align: center;
 }
 .details .recentOrders table tr
 {
     color: var(--black1);
     border-bottom: 1px solid rgba(0, 0, 0, 1);
 }
+.details .recentOrders table tr td {
+    padding: 10px;
+    text-align: center;
+}
 .details .recentOrders table tr:last-child
 {
     border-bottom: none;
+    text-align: center;
 }
 .details .recentOrders table tbody tr:hover
 {
     background: var(--blue);
     color: var(--white);
 }
-.details .recentOrders table tr td
-{
-    padding: 10px;
-}
-.details .recentOrders table tr td:nth-child(2),
-.details .recentOrders table tr td:last-child
-{
-    text-align: end;
-}
-.details .recentOrders table tr td:nth-child(3)
-{
-    text-align: center;
-}
-.status.delivered
+.price-green
 {
     padding: 2px 4px;
     background: lawngreen;
@@ -362,7 +358,7 @@ body
     font-size: 14px;
     font-weight: 500;
 }
-.status.inprogress
+.price-yellow
 {
     padding: 2px 4px;
     background: #f9ca3f;
@@ -371,7 +367,7 @@ body
     font-size: 14px;
     font-weight: 500;
 }
-.status.canceled
+.price-red
 {
     padding: 2px 4px;
     background: #f00;
@@ -1056,7 +1052,140 @@ input[type="checkbox"]:checked + .oval-checkbox {
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
     border-radius: 20px;
 }
-
+/* FAQ PAGE*/
+.faq-container
+{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    margin: 0 40px;
+    max-width: 600px;
+    flex-direction: column;
+    gap: 20px;
+}
+.faq-container h1
+{
+    color: var(--black1);
+}
+.container .tab
+{
+    position: relative;
+    background: #fff;
+    padding: 0 20px 20px;
+    box-shadow: 0 15px 25px rgba(0,0,0,0.05);
+    border-radius: 5px;
+    overflow: hidden;
+}
+.faq-container .tab input
+{
+    display: none;
+}
+.faq-container .tab label
+{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+}
+.faq-container .tab label::after
+{
+    content: '+';
+    position: absolute;
+    right: 20px;
+    font-size: 2em;
+    color: rgba(0,0,0,0.1);
+    transition: transform 1s;
+}
+.faq-container .tab:hover label::after
+{
+    color: #333;
+}
+.faq-container .tab input:checked ~ label::after
+{
+    transform: rotate(135deg);
+    color: var(--white);
+}
+.faq-container .tab label h2
+{
+    width: 40px;
+    height: 40px;
+    background: #333;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    font-size: 1.25em;
+    border-radius: 5px;
+    margin-right: 10px;
+}
+.faq-container .tab input:checked ~ label h2
+{
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    color: black;
+    font-size: 8em;
+    justify-content: flex-end;
+    padding: 20px;
+}
+.faq-container .tab:nth-child(2) label h2
+{
+    background: linear-gradient(135deg, #34bfa3, #0abf30);
+}
+.faq-container .tab:nth-child(3) label h2
+{
+    background: linear-gradient(135deg, #73A8FE, #734CEA);
+}
+.faq-container .tab:nth-child(4) label h2
+{
+    background: linear-gradient(135deg, #F7797A, #ff0000);
+}
+.faq-container .tab:nth-child(5) label h2
+{
+    background: linear-gradient(135deg, #69A3FF, #0056b3);
+}
+.faq-container .tab:nth-child(6) label h2
+{
+    background: linear-gradient(135deg, #e9bd0c, #f9ca3f);
+}
+.faq-container .tab label h3
+{
+    position: relative;
+    font-weight: 500;
+    color: #333333;
+    z-index: 10;
+}
+.faq-container .tab input:checked ~ label h3
+{
+    background: #fff;
+    padding: 2px 10px;
+    color: #333;
+    border-radius: 2px;
+    box-shadow: 0 5px 15px rgba(0,0,0,0.05);
+}
+.faq-container .tab .content
+{
+    max-height: 0;
+    transition: 1s;
+    overflow: hidden;
+}
+.faq-container .tab input:checked ~ .content
+{
+    max-width: 100vh;
+}
+.faq-container .tab .content p
+{
+    position: relative;
+    padding: 10px 0;
+    color: #333333;
+    z-index: 10;
+}
+.faq-container .tab input:checked ~ .content p
+{
+    color: #fff;
+}
 /* MEDIA QUERIES*/
 @media (max-width: 991px)
 {

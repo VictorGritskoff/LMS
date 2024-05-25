@@ -60,7 +60,7 @@
                 </a>
             </li>
             <li>
-                <a href="#">
+                <a th:href="@{/help}">
                     <span class="icon"><ion-icon name="information-circle-outline"></ion-icon></span>
                     <span class="title"> Помощь</span>
                 </a>
@@ -90,7 +90,7 @@
                 <div class="cardBox">
                     <div class="card">
                         <div>
-                            <div class="numbers">1,504</div>
+                            <div class="numbers" th:text="${clientCount}"></div>
                             <div class="cardName">Клиенты</div>
                         </div>
                         <div class="iconBox">
@@ -99,7 +99,7 @@
                     </div>
                     <div class="card">
                         <div>
-                            <div class="numbers">42</div>
+                            <div class="numbers" th:text="${courseCount}"></div>
                             <div class="cardName">Курсы</div>
                         </div>
                         <div class="iconBox">
@@ -108,7 +108,7 @@
                     </div>
                     <div class="card">
                         <div>
-                            <div class="numbers">68</div>
+                            <div class="numbers" th:text="${teacherCount}"></div>
                             <div class="cardName">Преподаватели</div>
                         </div>
                         <div class="iconBox">
@@ -117,7 +117,7 @@
                     </div>
                     <div class="card">
                         <div>
-                            <div class="numbers">4500</div>
+                            <div class="numbers" th:text="${profit}"></div>
                             <div class="cardName">Прибыль</div>
                         </div>
                         <div class="iconBox">
@@ -139,53 +139,21 @@
                     <div class="recentOrders">
                         <div class="cardHeader">
                             <h2>Недавние заказы</h2>
-                            <a href="#" class="btn">Viev All</a>
+                            <a th:href="@{/orders}" class="btn">Все заказы</a>
                         </div>
                         <table>
                             <thead>
                                 <tr>
-                                    <td>Name</td>
-                                    <td>Price</td>
-                                    <td>Payment</td>
-                                    <td>Status</td>
+                                    <th>Имя клиента</th>
+                                    <th>Курс</th>
+                                    <th>Цена</th>
                                 </tr>
                             </thead>
                             <tbody>
-                                <tr>
-                                    <td>Advanced Python</td>
-                                    <td>$1500</td>
-                                    <td>Paid</td>
-                                    <td><span class="status delivered">Delivered</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Machine Learning</td>
-                                    <td>$3000</td>
-                                    <td>Paid</td>
-                                    <td><span class="status delivered">Delivered</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Advanced Java</td>
-                                    <td>$1500</td>
-                                    <td>Paid</td>
-                                    <td><span class="status inprogress">In progress</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Cybersecurity</td>
-                                    <td>$8000</td>
-                                    <td>Paid</td>
-                                    <td><span class="status delivered">Delivered</span></td>
-                                </tr>
-                                <tr>
-                                    <td>Advanced C#</td>
-                                    <td>$1500</td>
-                                    <td>Paid</td>
-                                    <td><span class="status canceled">Canceled</span></td>
-                                </tr>
-                                <tr>
-                                    <td>DevOps Fundamentals</td>
-                                    <td>$2000</td>
-                                    <td>Paid</td>
-                                    <td><span class="status inprogress">In progress</span></td>
+                                <tr th:each="order : ${recentOrders}">
+                                    <td th:text="${order.client.firstName+' ' +order.client.lastName+ ' '+order.client.surname}"></td>
+                                    <td th:text="${order.course.name}"></td>
+                                    <td th:text="${order.orderPrice}"></td>
                                 </tr>
                             </tbody>
                         </table>
@@ -196,35 +164,21 @@
                             <h2>Новые клиенты</h2>
                         </div>
                         <table>
-                            <tr>
-                                <td width="60px"><div class="imgBx"><img src="img/img1.jpg"></div></td>
-                                <td><h4>Harry<br><span>Google</span></h4></td>
-                            </tr>
-                            <tr>
-                                <td width="60px"><div class="imgBx"><img src="img/img2.jpg"></div></td>
-                                <td><h4>Franklin<br><span>Meta</span></h4></td>
-                            </tr>
-                            <tr>
-                                <td width="60px"><div class="imgBx"><img src="img/img3.jpg"></div></td>
-                                <td><h4>Alexa<br><span>Meta</span></h4></td>
-                            </tr>
-                            <tr>
-                                <td width="60px"><div class="imgBx"><img src="img/img4.jpg"></div></td>
-                                <td><h4>Anastasia<br><span>Apple</span></h4></td>
-                            </tr>
-                            <tr>
-                                <td width="60px"><div class="imgBx"><img src="img/img5.jpg"></div></td>
-                                <td><h4>Michael<br><span>Tesla</span></h4></td>
-                            </tr>
-                            <tr>
-                                <td width="60px"><div class="imgBx"><img src="img/img6.jpg"></div></td>
-                                <td><h4>Arasaka<br><span>OpenAI</span></h4></td>
-                            </tr>
+                            <tr th:each="client : ${recentClients}">
+                                <td>
+                                    <h4 th:text="${client.firstName+' ' +client.lastName+ ' '+client.surname}"></h4>
+                                    <span th:text="${client.email}"></span>
+                                </td>
                         </table>
                     </div>
                 </div>
             </div>
         </div>
+        <script th:inline="javascript">
+            /*<![CDATA[*/
+            var profitData = /*[[${profitData}]]*/ [];
+            /*]]>*/
+        </script>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>

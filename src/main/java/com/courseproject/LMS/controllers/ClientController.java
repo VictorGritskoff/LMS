@@ -18,9 +18,6 @@ public class ClientController {
     @GetMapping("/customers")
     public String getClients(Model model){
         List<Client> clientList = clientService.getClients();
-        for (Client c : clientList) {
-            System.out.println(c);
-        }
         model.addAttribute("customers", clientList);
         return "customers";
     }

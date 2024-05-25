@@ -31,4 +31,10 @@ public class ClientService {
     public Client getClientById(int clientId) {
         return clientRepository.getById(clientId);
     }
+    public int getClientCount() {
+        return clientRepository.findAll().size();
+    }
+    public List<Client> getRecentClients() {
+        return clientRepository.findTop6ByOrderByCreationDateDesc();
+    }
 }
