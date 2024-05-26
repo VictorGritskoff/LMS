@@ -1056,26 +1056,27 @@ input[type="checkbox"]:checked + .oval-checkbox {
 .faq-container
 {
     display: flex;
-    justify-content: center;
     align-items: center;
     min-height: 100vh;
-    margin: 0 40px;
+    margin: 0 auto;
     max-width: 600px;
     flex-direction: column;
     gap: 20px;
 }
-.faq-container h1
+.faq-h1
 {
-    color: var(--black1);
+    margin-top: 20px;
+    padding: 20px;
 }
-.container .tab
+.faq-container .tab
 {
     position: relative;
     background: #fff;
-    padding: 0 20px 20px;
+    padding: 20px 20px 20px;
     box-shadow: 0 15px 25px rgba(0,0,0,0.05);
     border-radius: 5px;
     overflow: hidden;
+    min-width: 500px;
 }
 .faq-container .tab input
 {
@@ -1173,7 +1174,7 @@ input[type="checkbox"]:checked + .oval-checkbox {
 }
 .faq-container .tab input:checked ~ .content
 {
-    max-width: 100vh;
+    max-height: 200px;
 }
 .faq-container .tab .content p
 {

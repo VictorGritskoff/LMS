@@ -11,6 +11,7 @@ public class LmsApplication {
 	//TODO проверки на различных формах ввода в таблицах
 	//TODO проверить даты на оси y в mainPageChart
 	//TODO HELP
+	//TODO в Orders сделать что-нибудь с ценой заказа
 	public static void main(String[] args) {
 		SpringApplication.run(LmsApplication.class, args);
 	}

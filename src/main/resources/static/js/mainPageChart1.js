@@ -44,7 +44,7 @@ var dates = filledProfitData.map(item => ({
 
 var options = {
   series: [{
-    name: 'Прибыль',
+    name: 'Выручка',
     data: dates
   }],
   chart: {
@@ -67,7 +67,7 @@ var options = {
     size: 0,
   },
   title: {
-    text: 'Прибыль (руб) в этом году',
+    text: 'Выручка (руб) в этом году',
     align: 'center',
     style: {
       fontSize: '26px'
@@ -90,7 +90,7 @@ var options = {
       },
     },
     title: {
-      text: 'Доход',
+      text: 'Выручка',
       style: {
         fontSize: '16px'
       }

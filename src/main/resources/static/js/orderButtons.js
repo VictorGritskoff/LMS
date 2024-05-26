@@ -36,12 +36,12 @@ $('document').ready(function (){
         $('#deleteModal').modal();
     });
 
-    // Обработчик клика по кнопке подтверждения удаления
     $('#confirmedDeleteButton').on('click', function(event) {
         event.preventDefault();
-        var href = $(this).attr('href'); // Получаем ссылку для удаления из атрибута href
+        var href = $(this).attr('href');
         $.post(href, function () {
-            window.location.reload(); // Перезагружаем страницу после успешного удаления
+            window.location.reload();
         });
     });
+
 });

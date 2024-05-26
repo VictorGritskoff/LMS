@@ -4,6 +4,15 @@ window.Apex = {
   }
 };
 
+// ПЕРВЫЙ ГРАФИК
+var weeks = countOrdersData.map(function(item) {
+  return item.week;
+});
+
+var ordersCount = countOrdersData.map(function(item) {
+  return item.courseCount;
+});
+
 var spark1 = {
   chart: {
     id: 'sparkline1',
@@ -15,9 +24,12 @@ var spark1 = {
     group: 'sparklines'
   },
   series: [{
-    name: 'Сумма $',
-    data: [25, 66, 41, 59, 25, 44, 12, 36, 9, 21, 10, 43]
+    name: 'Количество заказов',
+    data: ordersCount
   }],
+  xaxis: {
+    categories: weeks
+  },
   stroke: {
     curve: 'smooth'
   },
@@ -32,18 +44,27 @@ var spark1 = {
     x: {
       show: true,
       formatter: function(val) {
-        return 'Месяц: ' + val;
+        return 'Неделя: ' + val;
       }
     }
   },
   title: {
-    text: 'Продажи за месяц',
+    text: 'Заказы в месяц',
     style: {
       fontSize: '20px'
     }
   },
   colors: ['#734CEA']
 };
+// ВТОРОЙ ГРАФИК
+var salaryMonths = [];
+var totalSalaries = [];
+
+// Проход по всем элементам в массиве totalSalary и добавление месяцев и общих зарплат в соответствующие массивы
+totalSalary.forEach(function(item) {
+  salaryMonths.push(item.month); // Добавление месяца в массив месяцев
+  totalSalaries.push(parseFloat(item.totalSalary));
+});
 
 var spark2 = {
   chart: {
@@ -56,9 +77,12 @@ var spark2 = {
     group: 'sparklines'
   },
   series: [{
-    name: 'Сумма $',
-    data: [12, 14, 2, 47, 32, 44, 14, 55, 41, 69, 35, 40]
+    name: 'Общая зарплата (руб)',
+    data: totalSalaries
   }],
+  xaxis: {
+    categories: salaryMonths
+  },
   stroke: {
     curve: 'smooth'
   },
@@ -78,13 +102,23 @@ var spark2 = {
     }
   },
   title: {
-    text: 'Зарплаты',
+    text: 'Зарплаты в год',
     style: {
       fontSize: '20px'
     }
   },
   colors: ['#34bfa3']
 };
+
+// ТРЕТИЙ ГРАФИК
+var salesMonths = [];
+var salesInMonth = [];
+
+// Проход по всем элементам в массиве данных о продажах и добавление месяцев и продаж в соответствующие массивы
+totalSales.forEach(function(item) {
+  salesMonths.push(item.month); // Добавление месяца в массив месяцев
+  salesInMonth.push(parseFloat(item.sales));
+});
 
 var spark3 = {
   chart: {
@@ -97,9 +131,12 @@ var spark3 = {
     group: 'sparklines'
   },
   series: [{
-    name: 'Сумма $',
-    data: [47, 45, 74, 32, 56, 31, 44, 33, 45, 19, 43, 20]
+    name: 'Продажи (руб)',
+    data: salesInMonth
   }],
+  xaxis: {
+    categories: salesMonths
+  },
   stroke: {
     curve: 'smooth'
   },
@@ -127,6 +164,16 @@ var spark3 = {
   colors: ['#f4516c']
 };
 
+// ЧЕТВЕРТЫЙ ГРАФИК
+var revenueMonths = [];
+var revenueValues = [];
+
+// Проход по всем элементам в массиве данных о доходах и добавление месяцев и доходов в соответствующие массивы
+revenueSpark.forEach(function(item) {
+  revenueMonths.push(item.month); // Добавление месяца в массив месяцев
+  revenueValues.push(parseFloat(item.revenue)); // Добавление дохода в массив доходов
+});
+
 var spark4 = {
   chart: {
     id: 'sparkline4',
@@ -138,9 +185,12 @@ var spark4 = {
     group: 'sparklines'
   },
   series: [{
-    name: 'Сумма $',
-    data: [15, 75, 47, 65, 14, 32, 19, 54, 44, 61, 20, 35]
+    name: 'Сумма (руб)',
+    data: revenueValues
   }],
+  xaxis: {
+    categories: revenueMonths
+  },
   stroke: {
     curve: 'smooth'
   },
