@@ -7,6 +7,9 @@ import org.springframework.stereotype.Service;
 
 import java.math.BigDecimal;
 import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.util.*;
 
 @Service
@@ -30,6 +33,7 @@ public class TeacherService {
     public int getTeacherCount() {
         return teacherRepository.findAll().size();
     }
+
     // Получение данных для графика "Зарплаты за год" на странице аналитики
     public List<Map<String, BigDecimal>> getSalaryForMonthScale() {
         LocalDate startDate = LocalDate.now().withDayOfMonth(1); // Начало текущего месяца
@@ -56,5 +60,35 @@ public class TeacherService {
         }
 
         return salaryData;
+    }
+    public List<Map<String, Object>> getExpensesForTimeScale() {
+        LocalDate startDate = LocalDate.now().withDayOfMonth(1); // Начало текущего месяца
+        LocalDate endDate = startDate.plusMonths(1).minusDays(1); // Конец текущего месяца
+
+        List<Map<String, Object>> expenses = new ArrayList<>();
+
+        // Получение зарплат за текущий месяц
+        List<Teacher> teachers = teacherRepository.findByCreationDateBetween(startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
+
+        // Группирование зарплат по времени добавления в базу данных и суммирование общего дохода
+        Map<LocalDateTime, BigDecimal> totalSalaryByTime = new TreeMap<>();
+        for (Teacher teacher : teachers) {
+            LocalDateTime formattedDate = teacher.getCreationDate().truncatedTo(ChronoUnit.MINUTES);
+            totalSalaryByTime.put(formattedDate, totalSalaryByTime.getOrDefault(formattedDate, BigDecimal.ZERO).add(teacher.getSalary()));
+        }
+
+        // Вычисление накопительной суммы
+        BigDecimal cumulativeSalary = BigDecimal.ZERO;
+        for (Map.Entry<LocalDateTime, BigDecimal> entry : totalSalaryByTime.entrySet()) {
+            cumulativeSalary = cumulativeSalary.add(entry.getValue());
+            Map<String, Object> dataPoint = new HashMap<>();
+            LocalDateTime time = entry.getKey();
+            String formattedTime = time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            dataPoint.put("time", formattedTime);
+            dataPoint.put("totalSalary", cumulativeSalary);
+            expenses.add(dataPoint);
+        }
+
+        return expenses;
     }
 }

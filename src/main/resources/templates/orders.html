@@ -135,8 +135,8 @@
         <form th:action="@{/orders/addNew}" method="post" id="addClientForm">
           <div class="form-group">
             <label for="orderClient" class="col-form-label">Клиент:</label>
-            <select class="form-control" id="orderClient" name="client">
-              <option>--ВЫБРАТЬ--</option>
+            <select class="form-control" id="orderClient" name="client" required>
+              <option value="">--ВЫБРАТЬ--</option>
               <option th:each="client : ${customers}"
                       th:value="${client.clientId}"
                       th:text="${client.surname}">
@@ -145,8 +145,8 @@
           </div>
           <div class="form-group">
             <label for="orderCourse" class="col-form-label">Курс:</label>
-            <select class="form-control" id="orderCourse" name="course">
-              <option>--ВЫБРАТЬ--</option>
+            <select class="form-control" id="orderCourse" name="course" required>
+              <option value="">--ВЫБРАТЬ--</option>
               <option th:each="course : ${courses}"
                       th:value="${course.courseId}"
                       th:text="${course.name}">
@@ -155,7 +155,7 @@
           </div>
           <div class="form-group">
             <label for="orderPrice" class="col-form-label">Сумма заказа:</label>
-            <input type="text" class="form-control" id="orderPrice" name="orderPrice">
+            <input type="text" class="form-control" id="orderPrice" name="orderPrice" readonly pattern="[0-9]+" title="Цена должна содержать только цифры">
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Сохранить</button>
@@ -201,7 +201,7 @@
           </div>
           <div class="form-group">
             <label for="orderPriceUpdate" class="col-form-label">Сумма заказа:</label>
-            <input type="text" class="form-control" id="orderPriceUpdate" name="orderPriceUpdate">
+            <input type="text" class="form-control" id="orderPriceUpdate" name="orderPriceUpdate" required pattern="[0-9]+" title="Цена должна содержать только цифры">
           </div>
           <!-- Скрытое поле для идентификатора клиента -->
           <input type="hidden" id="idEdit" name="id">

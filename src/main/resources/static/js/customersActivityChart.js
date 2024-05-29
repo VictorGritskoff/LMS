@@ -1,14 +1,14 @@
 var options = {
     series: [
     {
-      name: 'Actual',
+      name: 'Действительное',
       data: [
         {
           x: '2011',
           y: 1292,
           goals: [
             {
-              name: 'Expected',
+              name: 'Ожидаемое',
               value: 1400,
               strokeHeight: 5,
               strokeColor: '#775DD0'
@@ -124,7 +124,7 @@ var options = {
   legend: {
     show: true,
     showForSingleSeries: true,
-    customLegendItems: ['Actual', 'Expected'],
+    customLegendItems: ['Действительное', 'Ожидаемое'],
     markers: {
       fillColors: ['#00E396', '#775DD0']
     }

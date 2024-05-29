@@ -8,8 +8,11 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+import java.time.temporal.ChronoUnit;
 import java.time.temporal.WeekFields;
 import java.util.*;
+import java.util.stream.Collectors;
 
 @Service
 public class OrderService {
@@ -52,21 +55,20 @@ public class OrderService {
                 startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
 
         // Группировать заказы по дате и вычислять суммарную прибыль для каждой даты
-        Map<LocalDate, Double> profitByDate = new HashMap<>();
-        for (Order order : orders) {
-            LocalDate date = order.getOrderTime().toLocalDate();
-            double profit = profitByDate.getOrDefault(date, 0.0);
-            profit += order.getOrderPrice();
-            profitByDate.put(date, profit);
-        }
+        Map<LocalDate, Double> profitByDate = orders.stream()
+                .collect(Collectors.groupingBy(
+                        order -> order.getOrderTime().toLocalDate(),
+                        Collectors.summingDouble(Order::getOrderPrice)
+                ));
 
         // Преобразовать данные в формат, подходящий для передачи на график
-        for (LocalDate date : profitByDate.keySet()) {
+        profitByDate.forEach((date, profit) -> {
             Map<String, Object> dataPoint = new HashMap<>();
             dataPoint.put("orderTime", date);
-            dataPoint.put("profit", profitByDate.get(date));
+            dataPoint.put("profit", profit);
             profitData.add(dataPoint);
-        }
+        });
+
         return profitData;
     }
     public List<Order> getRecentOrders() {
@@ -177,4 +179,34 @@ public class OrderService {
         return revenueData;
     }
 
+    public List<Map<String, Object>> getIncomesForRevenueChart() {
+        List<Map<String, Object>> incomesData = new ArrayList<>();
+
+        // Получаем все заказы за текущий год
+        LocalDate startDate = LocalDate.now().withDayOfYear(1); // Начало текущего года
+        LocalDate endDate = startDate.plusYears(1).minusDays(1); // Конец текущего года
+        List<Order> orders = orderRepository.findByOrderTimeBetween(startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
+
+        // Группируем заказы по времени добавления в базу данных и суммируем общий доход
+        Map<LocalDateTime, Double> salesByTime = new TreeMap<>(); // Используем TreeMap для сортировки по времени
+        for (Order order : orders) {
+            LocalDateTime orderTime = order.getOrderTime().truncatedTo(ChronoUnit.MINUTES); // Округляем до минут для точности
+            double sales = order.getOrderPrice();
+            salesByTime.put(orderTime, salesByTime.getOrDefault(orderTime, 0.0) + sales);
+        }
+
+        // Вычисляем накопительную сумму
+        double cumulativeSales = 0.0;
+        for (Map.Entry<LocalDateTime, Double> entry : salesByTime.entrySet()) {
+            cumulativeSales += entry.getValue();
+            Map<String, Object> dataPoint = new HashMap<>();
+            LocalDateTime time = entry.getKey();
+            String formattedTime = time.format(DateTimeFormatter.ofPattern("yyyy-MM-dd HH:mm"));
+            dataPoint.put("time", formattedTime);
+            dataPoint.put("sales", String.valueOf(cumulativeSales));
+            incomesData.add(dataPoint);
+        }
+
+        return incomesData;
+    }
 }

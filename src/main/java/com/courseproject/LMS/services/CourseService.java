@@ -35,4 +35,18 @@ public class CourseService {
     public int getCourseCount() {
         return courseRepository.findAll().size();
     }
+    public double calculateAverageCoursePrice() {
+        List<Course> courses = getCourses();
+
+        if (courses == null || courses.isEmpty()) {
+            return 0.0;
+        }
+
+        double totalPrice = 0.0;
+        for (Course course : courses) {
+            totalPrice += course.getPrice();
+        }
+
+        return totalPrice / courses.size();
+    }
 }

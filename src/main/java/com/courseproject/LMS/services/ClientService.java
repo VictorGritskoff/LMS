@@ -10,6 +10,13 @@ import java.util.*;
 
 @Service
 public class ClientService {
+    private final CourseService courseService;
+    private final OrderService orderService;
+    @Autowired
+    public ClientService(CourseService courseService, OrderService orderService) {
+        this.courseService = courseService;
+        this.orderService = orderService;
+    }
     @Autowired
     private ClientRepository clientRepository;
 
@@ -63,5 +70,47 @@ public class ClientService {
         }
 
         return customersCountForYear;
+    }
+
+    // ДОПЕРЕДЕЛАТЬ
+    public double calculateExpectedCustomers(double revenue, double averageCoursePrice) {
+        if (revenue < 0) {
+            double loss = Math.abs(revenue);
+            return loss / averageCoursePrice;
+        } else {
+            double adjustedRevenue = revenue * 1.1; // Увеличиваем оборот на 10%
+            return adjustedRevenue / averageCoursePrice;
+        }
+    }
+    public List<Map<String, Map<String, Double>>> getExpectedVsRealCustomers() {
+        List<Map<String, Map<String, Double>>> result = new ArrayList<>();
+        List<Map<String, Double>> revenueData = orderService.getRevenueForYearChart();
+        List<Map<String, Double>> customersData = getCustomersForYearChart();
+
+        double averageCoursePrice = courseService.calculateAverageCoursePrice();
+
+        for (int i = 0; i < revenueData.size(); i++) {
+            Map<String, Map<String, Double>> monthData = new HashMap<>();
+
+            // Получаем данные по доходам и количеству клиентов за месяц
+            Map<String, Double> revenueMap = revenueData.get(i);
+            Map<String, Double> customerMap = customersData.get(i); // Получаем данные о клиентах для данного месяца
+
+            double revenue = revenueMap.get("revenue");
+            double currentCustomers = customerMap.get("client");
+            double expectedCustomers = calculateExpectedCustomers(revenue, averageCoursePrice);
+            if (currentCustomers == 0) {
+                expectedCustomers *= 1.1;
+            }
+            // Записываем результат в формате (месяц: {ожидаемое количество клиентов: реальное количество клиентов})
+            Map<String, Double> expectedVsReal = new HashMap<>();
+            expectedVsReal.put("Expected", expectedCustomers);
+            expectedVsReal.put("Real", currentCustomers);
+
+            monthData.put(String.valueOf(i + 1), expectedVsReal);
+            result.add(monthData);
+        }
+
+        return result;
     }
 }

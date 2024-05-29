@@ -9,7 +9,6 @@
         <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css">
         <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
         <link rel="stylesheet" href="/style.css">
-        <link rel="stylesheet" href="/css/notifications.css">
         <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
     </head>
     <body>
@@ -140,23 +139,24 @@
                                 <form th:action="@{/teachers/addNew}" method="post" id="addTeacherForm">
                                     <div class="form-group">
                                         <label for="firstNameAdd" class="col-form-label">Имя преподавателя:</label>
-                                        <input type="text" class="form-control" id="firstNameAdd" name="firstName">
+                                        <input type="text" class="form-control" id="firstNameAdd" name="firstName" required pattern="[a-zA-Zа-яА-ЯёЁ]+" title="Имя должно содержать только буквы">
                                     </div>
                                     <div class="form-group">
                                         <label for="lastNameAdd" class="col-form-label">Отчество преподавателя:</label>
-                                        <input type="text" class="form-control" id="lastNameAdd" name="lastName">
+                                        <input type="text" class="form-control" id="lastNameAdd" name="lastName" required pattern="[a-zA-Zа-яА-ЯёЁ]+" title="Отчество должно содержать только буквы">
                                     </div>
                                     <div class="form-group">
                                         <label for="surnameAdd" class="col-form-label">Фамилия преподавателя:</label>
-                                        <input type="text" class="form-control" id="surnameAdd" name="surname">
+                                        <input type="text" class="form-control" id="surnameAdd" name="surname" required pattern="[a-zA-Zа-яА-ЯёЁ]+" title="Фамилия должна содержать только буквы">
                                     </div>
                                     <div class="form-group">
                                         <label for="emailAdd" class="col-form-label">Электронная почта:</label>
-                                        <input type="text" class="form-control" id="emailAdd" name="email">
+                                        <input type="text" class="form-control" id="emailAdd" name="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Введите корректный email">
                                     </div>
                                     <div class="form-group">
                                         <label for="emailAdd" class="col-form-label">Зарплата:</label>
-                                        <input type="text" class="form-control" id="salaryAdd" name="salary">
+                                        <input type="text" class="form-control" id="salaryAdd" name="salary" required pattern="[0-9.]*" title="Может содержать только цифры и точку">
+
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary">Сохранить</button>
@@ -184,23 +184,23 @@
                                 <form th:action="@{/teachers/update}" method="post" id="updateTeacherForm">
                                     <div class="form-group">
                                         <label for="firstNameAdd" class="col-form-label">Имя преподавателя:</label>
-                                        <input type="text" class="form-control" id="firstNameUpdate" name="firstName">
+                                        <input type="text" class="form-control" id="firstNameUpdate" name="firstName" required pattern="[a-zA-Zа-яА-ЯёЁ]+" title="Имя должно содержать только буквы">
                                     </div>
                                     <div class="form-group">
                                         <label for="lastNameAdd" class="col-form-label">Отчество преподавателя:</label>
-                                        <input type="text" class="form-control" id="lastNameUpdate" name="lastName">
+                                        <input type="text" class="form-control" id="lastNameUpdate" name="lastName" required pattern="[a-zA-Zа-яА-ЯёЁ]+" title="Отчество должно содержать только буквы">
                                     </div>
                                     <div class="form-group">
                                         <label for="surnameAdd" class="col-form-label">Фамилия преподавателя:</label>
-                                        <input type="text" class="form-control" id="surnameUpdate" name="surname">
+                                        <input type="text" class="form-control" id="surnameUpdate" name="surname" required pattern="[a-zA-Zа-яА-ЯёЁ]+" title="Фамилия должна содержать только буквы">
                                     </div>
                                     <div class="form-group">
                                         <label for="emailAdd" class="col-form-label">Электронная почта:</label>
-                                        <input type="text" class="form-control" id="emailUpdate" name="email">
+                                        <input type="text" class="form-control" id="emailUpdate" name="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Введите корректный email">
                                     </div>
                                     <div class="form-group">
                                         <label for="emailAdd" class="col-form-label">Зарплата (руб):</label>
-                                        <input type="text" class="form-control" id="salaryUpdate" name="salary">
+                                        <input type="text" class="form-control" id="salaryUpdate" name="salary" required pattern="[0-9.]*" title="Может содержать только цифры и точку">
                                     </div>
                                     <!-- Скрытое поле для идентификатора клиента -->
                                     <input type="hidden" id="idUpdate" name="id">
@@ -298,7 +298,6 @@
                     </div>
                 </div>
                 
-                
         </div>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
@@ -315,7 +314,6 @@
         <script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.print.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/apexcharts"></script>
         <script src="/js/teacherButtons.js"></script>
-        <script src="/js/inputTeacherTablesCheck.js"></script>
         <script src="/js/downloadTableButtons.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>

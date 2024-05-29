@@ -9,6 +9,7 @@ import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.math.BigDecimal;
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Map;
 
@@ -38,13 +39,19 @@ public class AnalyticsController {
         List<Map<String, Double>> revenue = orderService.getRevenueForYearChart();
         // Получение данных для количества клиентов в год
         List<Map<String, Double>> clientCount = clientService.getCustomersForYearChart();
-        System.out.println(clientCount);
+        // Получение ожидаемого количества клиентов
+        //List<Map<String, Map<String, Double>>> expectedCustomersCount = clientService.getExpectedVsRealCustomers();
+        // Получение данный о расходах и доходах до минут
+        List<Map<String, Object>> expenses = teacherService.getExpensesForTimeScale();
+        List<Map<String, Object>> incomes = orderService.getIncomesForRevenueChart();
 
         model.addAttribute("countOrdersData", countOrdersData);
         model.addAttribute("totalSalary", totalSalary);
         model.addAttribute("totalSales", totalSales);
         model.addAttribute("revenueSpark", revenue);
         model.addAttribute("clientCount", clientCount);
+        model.addAttribute("expenses", expenses);
+        model.addAttribute("incomes", incomes);
 
         return "analytics";
     }

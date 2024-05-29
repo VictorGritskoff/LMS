@@ -63,6 +63,7 @@ public class ApplicationController {
         model.addAttribute("teacherCount", getTeacherCount());
         model.addAttribute("profit", getProfitForCards());
         model.addAttribute("profitData", getProfitDataForChart());
+        System.out.println(getProfitDataForChart());
         model.addAttribute("recentOrders", getRecentOrders());
         model.addAttribute("recentClients", getRecentClients());
         return "index";

@@ -9,7 +9,6 @@
     <link rel="stylesheet" href="https://cdn.datatables.net/2.0.3/css/dataTables.dataTables.css">
     <link rel="stylesheet" href="https://cdn.datatables.net/buttons/3.0.1/css/buttons.dataTables.css">
     <link rel="stylesheet" href="/style.css">
-    <link rel="stylesheet" href="/css/notifications.css">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 </head>
 <body>
@@ -138,11 +137,11 @@
                         <form th:action="@{/courses/addNew}" method="post" id="addTeacherForm">
                             <div class="form-group">
                                 <label for="courseNameAdd" class="col-form-label">Название курса:</label>
-                                <input type="text" class="form-control" id="courseNameAdd" name="name">
+                                <input type="text" class="form-control" id="courseNameAdd" name="name" required pattern="[a-zA-Zа-яА-ЯёЁ0-9\s]+" title="Название курса должно содержать буквы, цифры и пробелы">
                             </div>
                             <div class="form-group">
                                 <label for="courseTeacherAdd" class="col-form-label">Преподаватель:</label>
-                                <select class="form-control" id="courseTeacherAdd" name="teacher">
+                                <select class="form-control" id="courseTeacherAdd" name="teacher" required pattern="[a-zA-Zа-яА-ЯёЁ]+" title="Имя должно содержать только буквы">
                                     <option>--ВЫБРАТЬ--</option>
                                     <option th:each="teacher : ${teachers}"
                                             th:value="${teacher.teacherId}"
@@ -152,7 +151,8 @@
                             </div>
                             <div class="form-group">
                                 <label for="priceAdd" class="col-form-label">Цена курса (руб):</label>
-                                <input type="text" class="form-control" id="priceAdd" name="price">
+                                <input type="text" class="form-control" id="priceAdd" name="price" required pattern="[0-9.]*" title="Может содержать только цифры и точку">
+
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Сохранить</button>
@@ -193,7 +193,7 @@
                             </div>
                             <div class="form-group">
                                 <label for="priceEdit" class="col-form-label">Цена курса (руб):</label>
-                                <input type="text" class="form-control" id="priceEdit" name="price">
+                                <input type="text" class="form-control" id="priceEdit" name="price" required pattern="[0-9.]*" title="Может содержать только цифры и точку">
                             </div>
                             <!-- Скрытое поле для идентификатора клиента -->
                             <input type="hidden" id="idUpdate" name="id">

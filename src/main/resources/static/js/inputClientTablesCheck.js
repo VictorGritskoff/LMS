@@ -4,9 +4,8 @@ function isValidNameInput(input) {
     return namePattern.test(input);
 }
 
-// Функция для создания уведомлений
 function createToast(type, icon, title, text) {
-    let notifications = document.querySelector('.notifications');
+    let notifications = document.querySelector('body');
     let newToast = document.createElement('div');
     newToast.innerHTML = `
         <div class="toast ${type}">
