@@ -45,23 +45,19 @@ public class ClientService {
         return clientRepository.findTop6ByOrderByCreationDateDesc();
     }
     public List<Map<String, Double>> getCustomersForYearChart() {
-        // Получение начальной и конечной даты для текущего года
-        LocalDate startDate = LocalDate.now().withDayOfYear(1); // Начало текущего года
-        LocalDate endDate = startDate.plusYears(1).minusDays(1); // Конец текущего года
+        LocalDate startDate = LocalDate.now().withDayOfYear(1);
+        LocalDate endDate = startDate.plusYears(1).minusDays(1);
 
         List<Map<String, Double>> customersCountForYear = new ArrayList<>();
 
-        // Получение списка клиентов за текущий год
         List<Client> customers = clientRepository.findByCreationDateBetween(startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
 
-        // Группирование клиентов по месяцам и подсчет их количества
         Map<Integer, Long> customersByMonth = new HashMap<>();
         for (Client customer : customers) {
             int month = customer.getCreationDate().getMonthValue();
             customersByMonth.put(month, customersByMonth.getOrDefault(month, 0L) + 1);
         }
 
-        // Формирование данных для возврата
         for (int month = 1; month <= 12; month++) {
             Map<String, Double> dataPoint = new HashMap<>();
             dataPoint.put("month", (double) month);
@@ -82,35 +78,40 @@ public class ClientService {
             return adjustedRevenue / averageCoursePrice;
         }
     }
-    public List<Map<String, Map<String, Double>>> getExpectedVsRealCustomers() {
-        List<Map<String, Map<String, Double>>> result = new ArrayList<>();
+    public List<Map<String, Object>> getExpectedVsRealCustomers() {
+        List<Map<String, Object>> result = new ArrayList<>();
         List<Map<String, Double>> revenueData = orderService.getRevenueForYearChart();
         List<Map<String, Double>> customersData = getCustomersForYearChart();
 
         double averageCoursePrice = courseService.calculateAverageCoursePrice();
 
         for (int i = 0; i < revenueData.size(); i++) {
-            Map<String, Map<String, Double>> monthData = new HashMap<>();
-
-            // Получаем данные по доходам и количеству клиентов за месяц
             Map<String, Double> revenueMap = revenueData.get(i);
             Map<String, Double> customerMap = customersData.get(i); // Получаем данные о клиентах для данного месяца
 
             double revenue = revenueMap.get("revenue");
             double currentCustomers = customerMap.get("client");
             double expectedCustomers = calculateExpectedCustomers(revenue, averageCoursePrice);
-            if (currentCustomers == 0) {
-                expectedCustomers *= 1.1;
-            }
-            // Записываем результат в формате (месяц: {ожидаемое количество клиентов: реальное количество клиентов})
-            Map<String, Double> expectedVsReal = new HashMap<>();
-            expectedVsReal.put("Expected", expectedCustomers);
-            expectedVsReal.put("Real", currentCustomers);
 
-            monthData.put(String.valueOf(i + 1), expectedVsReal);
+            // Формируем данные в нужном формате для графика
+            Map<String, Object> monthData = new HashMap<>();
+            monthData.put("x", String.valueOf(i + 1));
+            monthData.put("y", currentCustomers);
+
+            Map<String, Object> goalData = new HashMap<>();
+            goalData.put("name", "Expected");
+            goalData.put("value", expectedCustomers);
+            goalData.put("strokeHeight", 5);
+            goalData.put("strokeColor", "#775DD0");
+
+            List<Map<String, Object>> goalsList = new ArrayList<>();
+            goalsList.add(goalData);
+
+            monthData.put("goals", goalsList);
+
             result.add(monthData);
         }
-
+        System.out.println(result);
         return result;
     }
 }

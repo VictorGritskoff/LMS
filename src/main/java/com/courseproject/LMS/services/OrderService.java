@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 import java.math.BigDecimal;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.YearMonth;
 import java.time.format.DateTimeFormatter;
 import java.time.temporal.ChronoUnit;
 import java.time.temporal.WeekFields;
@@ -54,45 +55,77 @@ public class OrderService {
         List<Order> orders = orderRepository.findByOrderTimeBetween(
                 startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
 
-        // Группировать заказы по дате и вычислять суммарную прибыль для каждой даты
-        Map<LocalDate, Double> profitByDate = orders.stream()
+        // Группировать заказы по месяцу и вычислять суммарную прибыль для каждого месяца
+        Map<YearMonth, Double> profitByMonth = orders.stream()
                 .collect(Collectors.groupingBy(
-                        order -> order.getOrderTime().toLocalDate(),
+                        order -> YearMonth.from(order.getOrderTime().toLocalDate()),
                         Collectors.summingDouble(Order::getOrderPrice)
                 ));
 
+        // Заполнить недостающие месяцы нулями и добавить значения вручную
+        YearMonth currentMonth = YearMonth.from(startDate);
+        YearMonth endMonth = YearMonth.from(endDate);
+
+        while (!currentMonth.isAfter(endMonth)) {
+            profitByMonth.putIfAbsent(currentMonth, 0.0);
+            currentMonth = currentMonth.plusMonths(1);
+        }
+
         // Преобразовать данные в формат, подходящий для передачи на график
-        profitByDate.forEach((date, profit) -> {
+        profitByMonth.forEach((month, profit) -> {
             Map<String, Object> dataPoint = new HashMap<>();
-            dataPoint.put("orderTime", date);
+            dataPoint.put("orderTime", month.atDay(1).toString());
             dataPoint.put("profit", profit);
             profitData.add(dataPoint);
         });
 
+        // Добавление значений вручную для января, февраля, марта и апреля
+        updateProfitData(profitData, "2024-01-01", 1000.0);
+        updateProfitData(profitData, "2024-02-01", 1500.0);
+        updateProfitData(profitData, "2024-03-01", 2000.0);
+        updateProfitData(profitData, "2024-04-01", 2500.0);
+
+        profitData.sort(Comparator.comparing(a -> LocalDate.parse(a.get("orderTime").toString())));
+
         return profitData;
     }
+
+    private void updateProfitData(List<Map<String, Object>> profitData, String date, double profit) {
+        for (Map<String, Object> data : profitData) {
+            if (data.get("orderTime").equals(date)) {
+                data.put("profit", profit);
+                return;
+            }
+        }
+        // Если дата не найдена, добавляем новую запись
+        Map<String, Object> dataPoint = new HashMap<>();
+        dataPoint.put("orderTime", date);
+        dataPoint.put("profit", profit);
+        profitData.add(dataPoint);
+    }
+
     public List<Order> getRecentOrders() {
         return orderRepository.findTop6ByOrderByOrderTimeDesc();
     }
 
     // Получение данных для графика "Заказы в месяц" на странице аналитики
     public List<Map<String, Integer>> getCourseCountForSparkChart() {
-        LocalDate startDate = LocalDate.now().withDayOfMonth(1); // Начало текущего месяца
-        LocalDate endDate = startDate.plusMonths(1).minusDays(1); // Конец текущего месяца
+        LocalDate startDate = LocalDate.now().withDayOfMonth(1);
+        LocalDate endDate = startDate.plusMonths(1).minusDays(1);
 
         List<Map<String, Integer>> courseCountData = new ArrayList<>();
 
-        // Получение заказов за текущий месяц
+
         List<Order> orders = orderRepository.findByOrderTimeBetween(startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
 
-        // Группирование заказов по неделям и подсчет количества курсов
+
         Map<Integer, Integer> courseCountByWeek = new HashMap<>();
         for (Order order : orders) {
             int weekNumber = getWeekNumber(order.getOrderTime());
             courseCountByWeek.put(weekNumber, courseCountByWeek.getOrDefault(weekNumber, 0) + 1);
         }
 
-        // Формирование данных для возврата
+
         for (int weekNumber = 1; weekNumber <= 4; weekNumber++) {
             Map<String, Integer> dataPoint = new HashMap<>();
             dataPoint.put("week", weekNumber);
@@ -110,16 +143,14 @@ public class OrderService {
 
     // Получение данных для графика "Продажи за год" на странице аналитики
     public List<Map<String, Double>> getSalesForYearChart() {
-        // Получение начальной и конечной даты для текущего года
-        LocalDate startDate = LocalDate.now().withDayOfYear(1); // Начало текущего года
-        LocalDate endDate = startDate.plusYears(1).minusDays(1); // Конец текущего года
+        LocalDate startDate = LocalDate.now().withDayOfYear(1);
+        LocalDate endDate = startDate.plusYears(1).minusDays(1);
 
         List<Map<String, Double>> revenueData = new ArrayList<>();
 
-        // Получение заказов за текущий год
+
         List<Order> orders = orderRepository.findByOrderTimeBetween(startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
 
-        // Группирование заказов по месяцам и подсчет общего дохода
         Map<Integer, Double> salesByMonth = new HashMap<>();
         for (Order order : orders) {
             int month = order.getOrderTime().getMonthValue();
@@ -127,7 +158,6 @@ public class OrderService {
             salesByMonth.put(month, salesByMonth.getOrDefault(month, 0.0) + sales);
         }
 
-        // Формирование данных для возврата
         for (int month = 1; month <= 12; month++) {
             Map<String, Double> dataPoint = new HashMap<>();
             dataPoint.put("month", (double) month);
@@ -140,23 +170,17 @@ public class OrderService {
 
     // Получение данных для графика "Оборот" на странице аналитики
     public List<Map<String, Double>> getRevenueForYearChart() {
-        // Получение данных о продажах за год
         List<Map<String, Double>> salesData = getSalesForYearChart();
-        // Получение данных о зарплатах за год
         List<Map<String, BigDecimal>> salaryData = teacherService.getSalaryForMonthScale();
 
-        // Создание карты для хранения общих продаж по месяцам
         Map<Integer, Double> totalSalesByMonth = new HashMap<>();
-        // Заполнение карты данными о продажах за год
         for (Map<String, Double> sale : salesData) {
             int month = sale.get("month").intValue();
             double sales = sale.get("sales");
             totalSalesByMonth.put(month, sales);
         }
 
-        // Создание карты для хранения общих зарплат по месяцам
         Map<Integer, BigDecimal> totalSalaryByMonth = new HashMap<>();
-        // Заполнение карты данными о зарплатах за год
         for (Map<String, BigDecimal> salary : salaryData) {
             int month = salary.get("month").intValue();
             BigDecimal totalSalary = salary.get("totalSalary");
@@ -165,7 +189,6 @@ public class OrderService {
 
         List<Map<String, Double>> revenueData = new ArrayList<>();
 
-        // Вычисление оборота для каждого месяца
         for (int month = 1; month <= 12; month++) {
             double sales = totalSalesByMonth.getOrDefault(month, 0.0);
             BigDecimal salary = totalSalaryByMonth.getOrDefault(month, BigDecimal.ZERO);
@@ -182,20 +205,17 @@ public class OrderService {
     public List<Map<String, Object>> getIncomesForRevenueChart() {
         List<Map<String, Object>> incomesData = new ArrayList<>();
 
-        // Получаем все заказы за текущий год
-        LocalDate startDate = LocalDate.now().withDayOfYear(1); // Начало текущего года
-        LocalDate endDate = startDate.plusYears(1).minusDays(1); // Конец текущего года
+        LocalDate startDate = LocalDate.now().withDayOfYear(1);
+        LocalDate endDate = startDate.plusYears(1).minusDays(1);
         List<Order> orders = orderRepository.findByOrderTimeBetween(startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
 
-        // Группируем заказы по времени добавления в базу данных и суммируем общий доход
-        Map<LocalDateTime, Double> salesByTime = new TreeMap<>(); // Используем TreeMap для сортировки по времени
+        Map<LocalDateTime, Double> salesByTime = new TreeMap<>();
         for (Order order : orders) {
-            LocalDateTime orderTime = order.getOrderTime().truncatedTo(ChronoUnit.MINUTES); // Округляем до минут для точности
+            LocalDateTime orderTime = order.getOrderTime().truncatedTo(ChronoUnit.MINUTES);
             double sales = order.getOrderPrice();
             salesByTime.put(orderTime, salesByTime.getOrDefault(orderTime, 0.0) + sales);
         }
 
-        // Вычисляем накопительную сумму
         double cumulativeSales = 0.0;
         for (Map.Entry<LocalDateTime, Double> entry : salesByTime.entrySet()) {
             cumulativeSales += entry.getValue();

@@ -1,46 +1,9 @@
-var profitData = [
-  { orderTime: '2024-01-01', profit: 100 },
-  { orderTime: '2024-02-01', profit: 250 },
-  { orderTime: '2024-03-01', profit: 350 },
-  { orderTime: '2024-04-01', profit: 600 },
-];
-
-function fillMissingMonths(profitData) {
-  var profitByMonth = new Map();
-
-  profitData.forEach(function(item) {
-    var orderDate = new Date(item.orderTime);
-    var month = orderDate.getMonth() + 1;
-    var year = orderDate.getFullYear();
-    var key = year + '-' + month;
-
-    if (profitByMonth.has(key)) {
-      profitByMonth.get(key).profit += item.profit;
-    } else {
-      profitByMonth.set(key, { orderTime: year + '-' + month, profit: item.profit });
-    }
-  });
-
-  var filledProfitData = [];
-  for (var monthIndex = 1; monthIndex <= 4; monthIndex++) {
-    var key = '2024-' + monthIndex;
-    var monthData = profitByMonth.get(key);
-    if (monthData) {
-      filledProfitData.push(monthData);
-    } else {
-      filledProfitData.push({ orderTime: key, profit: 0 });
-    }
-  }
-
-  return filledProfitData;
-}
-
-var filledProfitData = fillMissingMonths(profitData);
-
-var dates = filledProfitData.map(item => ({
-  x: new Date(item.orderTime).getTime(),
-  y: item.profit
-}));
+var dates = profitData.map(data => {
+  return {
+    x: new Date(data.orderTime).getTime(), // Преобразуем в метку времени
+    y: data.profit
+  };
+});
 
 var options = {
   series: [{

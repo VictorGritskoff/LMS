@@ -40,7 +40,7 @@ public class AnalyticsController {
         // Получение данных для количества клиентов в год
         List<Map<String, Double>> clientCount = clientService.getCustomersForYearChart();
         // Получение ожидаемого количества клиентов
-        //List<Map<String, Map<String, Double>>> expectedCustomersCount = clientService.getExpectedVsRealCustomers();
+        List<Map<String, Object>> expectedCustomersCount = clientService.getExpectedVsRealCustomers();
         // Получение данный о расходах и доходах до минут
         List<Map<String, Object>> expenses = teacherService.getExpensesForTimeScale();
         List<Map<String, Object>> incomes = orderService.getIncomesForRevenueChart();
@@ -52,7 +52,7 @@ public class AnalyticsController {
         model.addAttribute("clientCount", clientCount);
         model.addAttribute("expenses", expenses);
         model.addAttribute("incomes", incomes);
-
+        model.addAttribute("expectedCustomersCount", expectedCustomersCount);
         return "analytics";
     }
 }
