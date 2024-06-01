@@ -12,7 +12,8 @@ public class LmsApplication {
 	//TODO карточки курсов
 	//TODO МРОТ преподавателей из сети
 	//TODO отчеты
-	//TODO прикрутить авторизацию и регистрацию
+	//TODO SETTINGS
+	//TODO jar файл
 	public static void main(String[] args) {
 		SpringApplication.run(LmsApplication.class, args);
 	}

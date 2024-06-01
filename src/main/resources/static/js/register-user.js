@@ -1,12 +1,15 @@
 function registerUser(event) {
-    event.preventDefault(); // Предотвращаем стандартное действие отправки формы
+    event.preventDefault();
 
-    const passwordInput = document.querySelector('input[name="new_password"]');
-    const confirmPasswordInput = document.querySelector('input[name="confirmPassword"]');
-    const emailInput = document.querySelector('input[name="email"]');
     const usernameInput = document.querySelector('input[name="new_username"]');
     const firstNameInput = document.querySelector('input[name="firstName"]');
+    const surnameInput = document.querySelector('input[name="surname"]');
     const lastNameInput = document.querySelector('input[name="lastName"]');
+    const emailInput = document.querySelector('input[name="email"]');
+    const passwordInput = document.querySelector('input[name="new_password"]');
+
+
+
 
     function createToast(type, icon, title, text) {
         let notifications = document.querySelector('.notifications');
@@ -27,14 +30,8 @@ function registerUser(event) {
     }
 
     // Проверка наличия данных в полях
-    if (!usernameInput.value.trim() || !firstNameInput.value.trim() || !lastNameInput.value.trim() || !emailInput.value.trim() || !passwordInput.value.trim() || !confirmPasswordInput.value.trim()) {
+    if (!usernameInput.value.trim() || !firstNameInput.value.trim() || !surnameInput.value.trim() || !lastNameInput.value.trim() || !emailInput.value.trim() || !passwordInput.value.trim()) {
         createToast('error', 'fa-solid fa-circle-exclamation', 'Error', 'All fields are required!');
-        return;
-    }
-
-    // Проверка совпадения паролей
-    if (passwordInput.value.trim() !== confirmPasswordInput.value.trim()) {
-        createToast('error', 'fa-solid fa-circle-exclamation', 'Error', 'Passwords do not match!');
         return;
     }
 
@@ -49,6 +46,7 @@ function registerUser(event) {
     const formData = {
         username: usernameInput.value,
         firstName: firstNameInput.value,
+        surname: surnameInput.value,
         lastName: lastNameInput.value,
         email: emailInput.value,
         password: passwordInput.value,

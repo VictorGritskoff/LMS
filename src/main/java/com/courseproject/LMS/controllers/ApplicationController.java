@@ -55,6 +55,10 @@ public class ApplicationController {
         List<Client> recentClients = clientService.getRecentClients();
         return recentClients;
     }
+    @GetMapping("/login")
+    public String loginPage() {
+        return "signup";
+    }
 
     @GetMapping("/home")
     public String getHome(Model model) {

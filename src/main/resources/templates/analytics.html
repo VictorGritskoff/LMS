@@ -7,6 +7,7 @@
         <title>Skillify</title>
         <link rel="icon" type="image/png" href="/icons/shrek.ico">
         <link rel="stylesheet" href="/style.css">
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
     </head>
     <body>
     <div class="navigation">
@@ -66,7 +67,7 @@
                 </a>
             </li>
             <li>
-                <a href="signup.html">
+                <a id="exitButton">
                     <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
                     <span class="title"> Выход</span>
                 </a>
@@ -136,9 +137,9 @@
                         </div>
                     </div>
                 </div>
-
             </div>
-        </div>
+    </div>
+
         <script th:inline="javascript">var countOrdersData = /*[[${countOrdersData}]]*/ [];</script>
         <script th:inline="javascript">var totalSalary = /*[[${totalSalary}]]*/ [];</script>
         <script th:inline="javascript">var totalSales = /*[[${totalSales}]]*/ [];</script>
@@ -147,7 +148,11 @@
         <script th:inline="javascript">var expenses = /*[[${expenses}]]*/ [];</script>
         <script th:inline="javascript">var incomes = /*[[${incomes}]]*/ [];</script>
         <script th:inline="javascript">var expectedCustomersCount = /*[[${expectedCustomersCount}]]*/ [];</script>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+        <script src="/js/exitFunction.js"></script>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+        <script src="https://code.jquery.com/jquery-3.7.1.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
         <script type="module" src="/js/mainPageChart1.js"></script>

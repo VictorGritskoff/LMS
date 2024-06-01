@@ -1,161 +1,165 @@
 <!DOCTYPE html>
-<html lang = "en">
-    <head>
-        <meta charset="utf-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1.0">
-        <meta http-equiv="X-UA-Compatible" content="ie-edge">
-        <title>Skillify</title>
-        <link rel="icon" type="image/png" href="/icons/shrek.ico">
-        <link rel="stylesheet" href="/style.css">
-    </head>
-    <body>
-    <div class="navigation">
-        <ul>
-            <li>
-                <a href="#">
-                    <span class="icon"><ion-icon name="school-outline"></ion-icon></span>
-                    <span class="title"> SKILLIFY</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/home}">
-                    <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
-                    <span class="title"> Главная</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/customers}">
-                    <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
-                    <span class="title"> Клиенты</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/courses}">
-                    <span class="icon"><ion-icon name="document-outline"></ion-icon></span>
-                    <span class="title"> Курсы</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/teachers}">
-                    <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
-                    <span class="title"> Преподаватели</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/orders}">
-                    <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
-                    <span class="title"> Заказы</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/analytics}">
-                    <span class="icon"><ion-icon name="podium-outline"></ion-icon></span>
-                    <span class="title"> Аналитика</span>
-                </a>
-            </li>
-            <li class="active">
-                <a th:href="@{/settings}">
-                    <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
-                    <span class="title"> Настройки</span>
-                </a>
-            </li>
-            <li>
-                <a th:href="@{/help}">
-                    <span class="icon"><ion-icon name="information-circle-outline"></ion-icon></span>
-                    <span class="title"> Помощь</span>
-                </a>
-            </li>
-            <li>
-                <a href="signup.html">
-                    <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
-                    <span class="title"> Выход</span>
-                </a>
-            </li>
-        </ul>
+<html lang="en">
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie-edge">
+    <title>Skillify</title>
+    <link rel="icon" type="image/png" href="/icons/shrek.ico">
+    <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+<div class="navigation">
+    <ul>
+        <li>
+            <a href="#">
+                <span class="icon"><ion-icon name="school-outline"></ion-icon></span>
+                <span class="title">SKILLIFY</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/home}">
+                <span class="icon"><ion-icon name="home-outline"></ion-icon></span>
+                <span class="title">Главная</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/customers}">
+                <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
+                <span class="title">Клиенты</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/courses}">
+                <span class="icon"><ion-icon name="document-outline"></ion-icon></span>
+                <span class="title">Курсы</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/teachers}">
+                <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                <span class="title">Преподаватели</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/orders}">
+                <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                <span class="title">Заказы</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/analytics}">
+                <span class="icon"><ion-icon name="podium-outline"></ion-icon></span>
+                <span class="title">Аналитика</span>
+            </a>
+        </li>
+        <li class="active">
+            <a th:href="@{/settings}">
+                <span class="icon"><ion-icon name="settings-outline"></ion-icon></span>
+                <span class="title">Настройки</span>
+            </a>
+        </li>
+        <li>
+            <a th:href="@{/help}">
+                <span class="icon"><ion-icon name="information-circle-outline"></ion-icon></span>
+                <span class="title">Помощь</span>
+            </a>
+        </li>
+        <li>
+            <a id="exitButton" href="#">
+                <span class="icon"><ion-icon name="log-out-outline"></ion-icon></span>
+                <span class="title">Выход</span>
+            </a>
+        </li>
+    </ul>
+</div>
+
+<!-- main -->
+<div class="main">
+    <div class="topbar">
+        <div class="toggle">
+            <ion-icon name="menu-outline"></ion-icon>
+        </div>
+        <!-- user image -->
+        <div class="user">
+            <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
+        </div>
     </div>
 
-            <!-- main -->
-            <div class="main">
-                <div class="topbar">
-                    <div class="toggle">
-                        <ion-icon name="menu-outline"></ion-icon>
-                    </div>
-                    <!-- user image -->
-                    <div class="user">
-                        <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
-                    </div>
+    <!-- body -->
+    <div class="settings-page">
+        <div class="settings-box">
+            <h1>Настройки</h1>
+            <div class="controls">
+                <h2>Приложение</h2>
+                <a>Общее</a>
+                <div class="checkbox-wrapper">
+                    <h3>Сменить тему</h3>
+                    <input type="checkbox" id="changeTheme-check">
+                    <label for="changeTheme-check" class="oval-checkbox"></label>
                 </div>
-
-            <!-- body -->
-            <div class="settings-page">
-                <div class="settings-box">
-                    <h1>Настройки</h1>
-                    <div class="controls">
-                        <h2>Приложение</h2>
-                        <a>Общее</a>
-                        <div class="checkbox-wrapper">
-                            <h3>Сменить тему</h3>
-                            <input type="checkbox" id="changeTheme-check">
-                            <label for="changeTheme-check" class="oval-checkbox"></label>
-                        </div>
-                        <div class="checkbox-wrapper">
-                            <h3>Отправлять уведомления</h3>
-                            <input type="checkbox" id="changeNotifications-check">
-                            <label for="changeNotifications-check" class="oval-checkbox"></label>
-                        </div>
-                       <div class="others-settings">
-                        <h2>Другие</h2>
-                        <a>Другие настройки</a>
-                            <div class="others-wrapper">
-                                <h3>Сменить язык</h3>
-                                <div class="language-dropdown">
-                                    <select id="language-select">
-                                        <option value="ru">Русский</option>
-                                        <option value="en">English</option>
-                                    </select>
-                                </div>
-                            </div>
-                       </div>
-                    </div>
+                <div class="checkbox-wrapper">
+                    <h3>Отправлять уведомления</h3>
+                    <input type="checkbox" id="changeNotifications-check">
+                    <label for="changeNotifications-check" class="oval-checkbox"></label>
                 </div>
-                <div class="profile-box">
-                    <h1>Профиль</h1>
-                    <div class="profile-info">
-                        <div class="avatar"></div>
-                        <div class="profile-details">
-                            <div class="input-group">
-                                <label for="firstName">Имя:</label>
-                                <input type="text" id="firstName" name="firstName" disabled>
-                            </div>
-                            <div class="input-group">
-                                <label for="lastName">Фамилия:</label>
-                                <input type="text" id="lastName" name="lastName" disabled>
-                            </div>
-                            <div class="input-group">
-                                <label for="lastName">Отчество:</label>
-                                <input type="text" id="surname" name="surname" disabled>
-                            </div>
-                            <div class="input-group">
-                                <label for="username">Юзернейм:</label>
-                                <input type="text" id="username" name="username" disabled>
-                            </div>
-                            <div class="input-group">
-                                <label for="email">Почта:</label>
-                                <input type="email" id="email" name="email" disabled>
-                            </div>
-                            <div class="input-group">
-                                <label for="password">Пароль:</label>
-                                <input type="password" id="password" name="password" disabled>
-                            </div>
+                <div class="others-settings">
+                    <h2>Другие</h2>
+                    <a>Другие настройки</a>
+                    <div class="others-wrapper">
+                        <h3>Сменить язык</h3>
+                        <div class="language-dropdown">
+                            <select id="language-select">
+                                <option value="ru">Русский</option>
+                                <option value="en">English</option>
+                            </select>
                         </div>
                     </div>
-                    <button class="edit-button">Редактировать</button>
                 </div>
             </div>
-
-
-        <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
-        <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
-        <script src="/js/toggle.js"></script>
-    </body>
+        </div>
+        <div class="profile-box">
+            <h1>Профиль</h1>
+            <div class="profile-info">
+                <div class="avatar"></div>
+                <div class="profile-details">
+                    <div class="input-group">
+                        <label for="firstName">Имя:</label>
+                        <input type="text" id="firstName" name="firstName" th:value="${employee.firstName}" disabled>
+                    </div>
+                    <div class="input-group">
+                        <label for="lastName">Фамилия:</label>
+                        <input type="text" id="lastName" name="lastName" th:value="${employee.lastName}" disabled>
+                    </div>
+                    <div class="input-group">
+                        <label for="surname">Отчество:</label>
+                        <input type="text" id="surname" name="surname" th:value="${employee.surname}" disabled>
+                    </div>
+                    <div class="input-group">
+                        <label for="username">Юзернейм:</label>
+                        <input type="text" id="username" name="username" th:value="${employee.username}" disabled>
+                    </div>
+                    <div class="input-group">
+                        <label for="email">Почта:</label>
+                        <input type="email" id="email" name="email" th:value="${employee.email}" disabled>
+                    </div>
+                    <div class="input-group">
+                        <label for="password">Пароль:</label>
+                        <input type="password" id="password" name="password" th:value="${employee.password}" disabled>
+                    </div>
+                </div>
+            </div>
+            <button class="edit-button">Редактировать</button>
+        </div>
+    </div>
+    </div>
+<script src="https://code.jquery.com/jquery-3.7.1.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+<script src="/js/exitFunction.js"></script>
+<script src="/js/profileEdit.js"></script>
+<script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@4.3.1/dist/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+<script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
+<script src="/js/toggle.js"></script>
+</body>
 </html>
