@@ -121,31 +121,33 @@
         <div class="profile-box">
             <h1>Профиль</h1>
             <div class="profile-info">
-                <div class="avatar"></div>
+                <div class="avatar">
+                    <img id="profileImage" src="" alt="Profile Image" style="width: 100px; height: 100px;">
+                </div>
                 <div class="profile-details">
                     <div class="input-group">
                         <label for="firstName">Имя:</label>
-                        <input type="text" id="firstName" name="firstName" th:value="${employee.firstName}" disabled>
+                        <input type="text" id="firstName" name="firstName" disabled>
                     </div>
                     <div class="input-group">
                         <label for="lastName">Фамилия:</label>
-                        <input type="text" id="lastName" name="lastName" th:value="${employee.lastName}" disabled>
+                        <input type="text" id="lastName" name="lastName" disabled>
                     </div>
                     <div class="input-group">
                         <label for="surname">Отчество:</label>
-                        <input type="text" id="surname" name="surname" th:value="${employee.surname}" disabled>
+                        <input type="text" id="surname" name="surname" disabled>
                     </div>
                     <div class="input-group">
                         <label for="username">Юзернейм:</label>
-                        <input type="text" id="username" name="username" th:value="${employee.username}" disabled>
+                        <input type="text" id="username" name="username" disabled>
                     </div>
                     <div class="input-group">
                         <label for="email">Почта:</label>
-                        <input type="email" id="email" name="email" th:value="${employee.email}" disabled>
+                        <input type="email" id="email" name="email" disabled>
                     </div>
                     <div class="input-group">
                         <label for="password">Пароль:</label>
-                        <input type="password" id="password" name="password" th:value="${employee.password}" disabled>
+                        <input type="password" id="password" name="password" disabled>
                     </div>
                 </div>
             </div>

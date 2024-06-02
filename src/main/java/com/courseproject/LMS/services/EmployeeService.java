@@ -19,6 +19,9 @@ public class EmployeeService implements UserDetailsService {
     public Optional <Employee> findByUsername(String username) {
         return repository.findByUsername(username);
     }
+    public void save(Employee employee) {
+        repository.save(employee);
+    }
     @Override
     public UserDetails loadUserByUsername(String username) throws UsernameNotFoundException {
         Optional<Employee> user = repository.findByUsername(username);
