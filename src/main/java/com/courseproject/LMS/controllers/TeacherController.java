@@ -19,6 +19,7 @@ public class TeacherController {
     public String getTeachers(Model model){
         List<Teacher> teacherList = teacherService.getTeachers();
         model.addAttribute("teachers", teacherList);
+        model.addAttribute("MROT", teacherService.getCurrentMROT());
         return "teachers";
     }
     @PostMapping("/teachers/addNew")

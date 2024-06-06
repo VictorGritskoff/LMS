@@ -10,10 +10,9 @@ document.addEventListener('DOMContentLoaded', function() {
             document.getElementById('password').value = data.password;
             console.log("Путь к изображению:", data.imagePath);
             if (data.imagePath) {
-                document.getElementById('profileImage').src = data.imagePath;
+                document.getElementById('profileImage').src = "/uploads" + data.imagePath;
             }
         });
-
     document.querySelector('.edit-button').addEventListener('click', function() {
         Swal.fire({
             title: 'Редактировать профиль',
@@ -25,7 +24,6 @@ document.addEventListener('DOMContentLoaded', function() {
                 <input id="editEmail" class="swal2-input" placeholder="Почта" value="${document.getElementById('email').value}">
                 <input id="editPassword" class="swal2-input" placeholder="Пароль" value="${document.getElementById('password').value}">
                 <input type="file" id="editImage" class="swal2-input" placeholder="Изображение">
-                <img id="editImagePreview" src="${document.getElementById('profileImage').src}" alt="Image Preview" style="width: 100px; height: 100px; display: block; margin-top: 10px;">
             `,
             focusConfirm: false,
             preConfirm: () => {
@@ -62,6 +60,7 @@ document.addEventListener('DOMContentLoaded', function() {
                                     document.getElementById('email').value = result.value.email;
                                     document.getElementById('password').value = result.value.password;
                                     if (result.value.imageFile) {
+                                        console.log("Путь к изображению при загрузке:", result.value.imageFile);
                                         document.getElementById('profileImage').src = URL.createObjectURL(result.value.imageFile);
                                     }
                                 });

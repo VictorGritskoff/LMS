@@ -43,5 +43,13 @@ $('document').ready(function (){
             window.location.reload();
         });
     });
+    const orderCourseSelect = document.getElementById('orderCourse');
+    const orderPriceInput = document.getElementById('orderPrice');
+
+    orderCourseSelect.addEventListener('change', function () {
+        const selectedOption = this.options[this.selectedIndex];
+        const price = selectedOption.getAttribute('data-price');
+        orderPriceInput.value = price ? price : '';
+    });
 
 });

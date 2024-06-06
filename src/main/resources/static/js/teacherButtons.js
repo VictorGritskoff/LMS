@@ -29,4 +29,6 @@ $('document').ready(function (){
             window.location.reload(); // Перезагружаем страницу после успешного удаления
         });
     });
+    var currentMROT = MROT;
+    document.getElementById("salaryAdd").setAttribute("min", currentMROT);
 });

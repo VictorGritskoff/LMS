@@ -8,9 +8,6 @@ function registerUser(event) {
     const emailInput = document.querySelector('input[name="email"]');
     const passwordInput = document.querySelector('input[name="new_password"]');
 
-
-
-
     function createToast(type, icon, title, text) {
         let notifications = document.querySelector('.notifications');
         let newToast = document.createElement('div');
@@ -31,14 +28,14 @@ function registerUser(event) {
 
     // Проверка наличия данных в полях
     if (!usernameInput.value.trim() || !firstNameInput.value.trim() || !surnameInput.value.trim() || !lastNameInput.value.trim() || !emailInput.value.trim() || !passwordInput.value.trim()) {
-        createToast('error', 'fa-solid fa-circle-exclamation', 'Error', 'All fields are required!');
+        createToast('error', 'fa-solid fa-circle-exclamation', 'Error', 'Заполните все поля!');
         return;
     }
 
     // Проверка формата email
     const emailPattern = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
     if (!emailPattern.test(emailInput.value)) {
-        createToast('warning', 'fa-solid fa-circle-exclamation', 'Warning', 'Invalid email format!');
+        createToast('warning', 'fa-solid fa-circle-exclamation', 'Предупреждение', 'Неправильный формат почты!');
         return;
     }
 
@@ -60,32 +57,27 @@ function registerUser(event) {
         },
         body: JSON.stringify(formData)
     })
-        .then(response => {
+        .then(response => response.text().then(errorMessage => {
             if (!response.ok) {
-                // Если сервер вернул ошибку, отобразить соответствующее уведомление
-                response.text().then(errorMessage => {
-                    if (errorMessage.includes("Username is already taken")) {
-                        createToast('warning', 'fa-solid fa-circle-exclamation', 'Warning', 'Registration failed. Username already exists.');
-                    } else if (errorMessage.includes("Email is already taken")) {
-                        createToast('warning', 'fa-solid fa-circle-exclamation', 'Warning', 'Registration failed. Email already exists.');
-                    } else {
-                        createToast('error', 'fa-solid fa-circle-exclamation', 'Error', errorMessage);
-                    }
-                });
-                throw new Error('Registration failed.');
+                if (errorMessage.includes("Username is already taken")) {
+                    createToast('warning', 'fa-solid fa-circle-exclamation', 'Предупреждение', 'Такое имя пользователя уже занято.');
+                } else if (errorMessage.includes("Email is already taken")) {
+                    createToast('warning', 'fa-solid fa-circle-exclamation', 'Предупреждение', 'Такой адрес почты уже занят');
+                } else {
+                    createToast('error', 'fa-solid fa-circle-exclamation', 'Ошибка', errorMessage);
+                }
+                return Promise.reject(errorMessage);
             }
-            return response.json();
-        })
+            return errorMessage;
+        }))
         .then(data => {
-            // Обработка успешного ответа от сервера
             console.log('Success:', data);
-        })
-        .catch((error) => {
-            // Обработка других ошибок
-            createToast('success', 'fa-solid fa-circle-check', 'Success', 'Registration successful. Redirecting...');
+            createToast('success', 'fa-solid fa-circle-check', 'Успех', 'Регистрация завершена. Обновление...');
             setTimeout(() => {
                 window.location.reload();
             }, 5000);
+        })
+        .catch((error) => {
             console.error('Error:', error);
         });
 }

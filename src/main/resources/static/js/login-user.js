@@ -23,7 +23,7 @@ function loginUser(event) {
     // Проверка наличия данных в полях
     if (!usernameInput.value.trim() || !passwordInput.value.trim()) {
         event.preventDefault(); // Предотвращаем отправку формы
-        createToast('error', 'fa-solid fa-circle-exclamation', 'Error', 'Username and password are required!');
+        createToast('error', 'fa-solid fa-circle-exclamation', 'Ошибка', 'Все поля должны быть заполнены!');
     }
 }
 

@@ -24,6 +24,9 @@ public class RegistrationController {
         if (employeeRepository.findByUsername(employee.getUsername()).isPresent()) {
             return ResponseEntity.badRequest().body("Username is already taken!");
         }
+        else if (employeeRepository.findByEmail(employee.getEmail()).isPresent()) {
+            return ResponseEntity.badRequest().body("Email is already taken!");
+        }
 
         employee.setPassword(passwordEncoder.encode(employee.getPassword()));
         employee.setLanguage(Language.RU);

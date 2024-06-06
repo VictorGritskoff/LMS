@@ -25,22 +25,22 @@
     <div class="formBx">
         <div class="form signinForm">
             <form action="/login" method="post" id="authForm">
-                <h3>Sign In</h3>
+                <h3>Авторизация</h3>
                 <input type="text" name="username" placeholder="Имя пользователя">
                 <input type="password" name="password" placeholder="Пароль">
-                <input type="submit" value="Login" onclick="loginUser(event)">
+                <input type="submit" value="Войти" onclick="loginUser(event)">
             </form>
         </div>
         <div class="form signupForm">
             <form action="/register/user" method="post" id="registerForm">
-                <h3>Sign Up</h3>
+                <h3>Регистрация</h3>
                 <input type="text" name="new_username" placeholder="Имя пользователя">
                 <input type="text" name="firstName" placeholder="Имя">
                 <input type="text" name="surname" placeholder="Фамилия">
                 <input type="text" name="lastName" placeholder="Отчетство">
                 <input type="email" name="email" placeholder="Эл. почта">
                 <input type="password" name="new_password" placeholder="Пароль">
-                <input type="submit" value="Register" onclick="registerUser(event)">
+                <input type="submit" value="Сохранить" onclick="registerUser(event)">
             </form>
         </div>
     </div>

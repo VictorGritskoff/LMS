@@ -70,19 +70,21 @@ public class SettingsController {
 
     private String saveImage(MultipartFile imageFile) {
         try {
-            String uploadDir = "uploads/";
+            String uploadDir = "uploads/"; // Папка для загрузок должна быть доступна через веб-сервер
             File uploadDirFile = new File(uploadDir);
             if (!uploadDirFile.exists()) {
                 uploadDirFile.mkdirs();
             }
             String originalFilename = imageFile.getOriginalFilename();
-            String filePath = uploadDirFile.getAbsolutePath() + "/" + System.currentTimeMillis() + "_" + originalFilename;
-            System.out.println("Saving file to: " + filePath);
+            String timestamp = String.valueOf(System.currentTimeMillis());
+            String newFilename = timestamp + "_" + originalFilename;
+            String filePath = uploadDirFile.getAbsolutePath() + "/" + newFilename;
             File dest = new File(filePath);
             imageFile.transferTo(dest);
-            return "uploads/" + System.currentTimeMillis() + "_" + originalFilename;
+            return uploadDir + newFilename;
         } catch (IOException e) {
             throw new RuntimeException("Failed to store file " + imageFile.getOriginalFilename(), e);
         }
     }
+
 }

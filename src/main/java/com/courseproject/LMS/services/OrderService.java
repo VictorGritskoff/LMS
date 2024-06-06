@@ -79,7 +79,6 @@ public class OrderService {
             profitData.add(dataPoint);
         });
 
-        // Добавление значений вручную для января, февраля, марта и апреля
         updateProfitData(profitData, "2024-01-01", 1000.0);
         updateProfitData(profitData, "2024-02-01", 1500.0);
         updateProfitData(profitData, "2024-03-01", 2000.0);
@@ -143,14 +142,15 @@ public class OrderService {
 
     // Получение данных для графика "Продажи за год" на странице аналитики
     public List<Map<String, Double>> getSalesForYearChart() {
-        LocalDate startDate = LocalDate.now().withDayOfYear(1);
-        LocalDate endDate = startDate.plusYears(1).minusDays(1);
+        LocalDate startDate = LocalDate.now().withDayOfYear(1); // Начало текущего года
+        LocalDate currentDate = LocalDate.now(); // Текущая дата
 
         List<Map<String, Double>> revenueData = new ArrayList<>();
 
+        // Получение заказов за текущий год до текущей даты
+        List<Order> orders = orderRepository.findByOrderTimeBetween(startDate.atStartOfDay(), currentDate.atTime(23, 59, 59));
 
-        List<Order> orders = orderRepository.findByOrderTimeBetween(startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
-
+        // Группирование продаж по месяцам
         Map<Integer, Double> salesByMonth = new HashMap<>();
         for (Order order : orders) {
             int month = order.getOrderTime().getMonthValue();
@@ -158,10 +158,13 @@ public class OrderService {
             salesByMonth.put(month, salesByMonth.getOrDefault(month, 0.0) + sales);
         }
 
-        for (int month = 1; month <= 12; month++) {
+        // Накопительные продажи до текущего месяца
+        double cumulativeSales = 0.0;
+        for (int month = 1; month <= currentDate.getMonthValue(); month++) {
+            cumulativeSales += salesByMonth.getOrDefault(month, 0.0);
             Map<String, Double> dataPoint = new HashMap<>();
             dataPoint.put("month", (double) month);
-            dataPoint.put("sales", salesByMonth.getOrDefault(month, 0.0));
+            dataPoint.put("sales", cumulativeSales);
             revenueData.add(dataPoint);
         }
 

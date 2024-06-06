@@ -45,12 +45,12 @@ public class ClientService {
         return clientRepository.findTop6ByOrderByCreationDateDesc();
     }
     public List<Map<String, Double>> getCustomersForYearChart() {
-        LocalDate startDate = LocalDate.now().withDayOfYear(1);
-        LocalDate endDate = startDate.plusYears(1).minusDays(1);
+        LocalDate startDate = LocalDate.now().withDayOfYear(1); // Начало текущего года
+        LocalDate currentDate = LocalDate.now(); // Текущая дата
 
         List<Map<String, Double>> customersCountForYear = new ArrayList<>();
 
-        List<Client> customers = clientRepository.findByCreationDateBetween(startDate.atStartOfDay(), endDate.atTime(23, 59, 59));
+        List<Client> customers = clientRepository.findByCreationDateBetween(startDate.atStartOfDay(), currentDate.atTime(23, 59, 59));
 
         Map<Integer, Long> customersByMonth = new HashMap<>();
         for (Client customer : customers) {
@@ -58,17 +58,18 @@ public class ClientService {
             customersByMonth.put(month, customersByMonth.getOrDefault(month, 0L) + 1);
         }
 
-        for (int month = 1; month <= 12; month++) {
+        long cumulativeCustomers = 0L;
+        for (int month = 1; month <= currentDate.getMonthValue(); month++) {
+            cumulativeCustomers += customersByMonth.getOrDefault(month, 0L);
             Map<String, Double> dataPoint = new HashMap<>();
             dataPoint.put("month", (double) month);
-            dataPoint.put("client", customersByMonth.getOrDefault(month, 0L).doubleValue());
+            dataPoint.put("client", (double) cumulativeCustomers);
             customersCountForYear.add(dataPoint);
         }
 
         return customersCountForYear;
     }
 
-    // ДОПЕРЕДЕЛАТЬ
     public double calculateExpectedCustomers(double revenue, double averageCoursePrice) {
         if (revenue < 0) {
             double loss = Math.abs(revenue);
@@ -85,7 +86,9 @@ public class ClientService {
 
         double averageCoursePrice = courseService.calculateAverageCoursePrice();
 
-        for (int i = 0; i < revenueData.size(); i++) {
+        int currentMonth = LocalDate.now().getMonthValue();
+
+        for (int i = 0; i < currentMonth; i++) {
             Map<String, Double> revenueMap = revenueData.get(i);
             Map<String, Double> customerMap = customersData.get(i); // Получаем данные о клиентах для данного месяца
 
@@ -111,7 +114,7 @@ public class ClientService {
 
             result.add(monthData);
         }
-        System.out.println(result);
+
         return result;
     }
 }

@@ -83,10 +83,6 @@
                     <div class="toggle">
                         <ion-icon name="menu-outline"></ion-icon>
                     </div>
-                    <!-- user image -->
-                    <div class="user">
-                        <span class="icon"><ion-icon name="people-circle-outline"></ion-icon></span>
-                    </div>
                 </div>
 
 
@@ -136,7 +132,7 @@
                                 </button>
                             </div>
                             <div class="modal-body">
-                                <form th:action="@{/teachers/addNew}" method="post" id="addTeacherForm">
+                                <form th:action="@{/teachers/addNew}" method="post" id="addTeacherForm" onsubmit="return checkSalary()">
                                     <div class="form-group">
                                         <label for="firstNameAdd" class="col-form-label">Имя преподавателя:</label>
                                         <input type="text" class="form-control" id="firstNameAdd" name="firstName" required pattern="[a-zA-Zа-яА-ЯёЁ]+" title="Имя должно содержать только буквы">
@@ -154,9 +150,8 @@
                                         <input type="text" class="form-control" id="emailAdd" name="email" required pattern="[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" title="Введите корректный email">
                                     </div>
                                     <div class="form-group">
-                                        <label for="emailAdd" class="col-form-label">Зарплата:</label>
+                                        <label for="salaryAdd" class="col-form-label">Зарплата:</label>
                                         <input type="text" class="form-control" id="salaryAdd" name="salary" required pattern="[0-9.]*" title="Может содержать только цифры и точку">
-
                                     </div>
                                     <div class="form-group">
                                         <button type="submit" class="btn btn-primary">Сохранить</button>
@@ -240,7 +235,7 @@
                     </div>
                 </div>
 
-                <!-- cards -->
+                <!-- cards
                 <div class="teachers-cards">
                     <div class="card">
                         <img src="img/img1.jpg" alt="Person 1">
@@ -297,7 +292,24 @@
                         </div>
                     </div>
                 </div>
+                -->
         </div>
+    <script th:inline="javascript">
+        var currentMROT = /*[[${MROT}]]*/ 0;
+        function checkSalary() {
+            var salaryInput = document.getElementById("salaryAdd");
+            var enteredSalary = parseFloat(salaryInput.value);
+            if (enteredSalary < currentMROT) {
+                Swal.fire({
+                    icon: 'error',
+                    title: 'Ошибка',
+                    text: 'Зарплата не может быть меньше текущего МРОТ',
+                });
+                return false;
+            }
+            return true;
+        }
+    </script>
         <script type="module" src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.esm.js"></script>
         <script nomodule src="https://unpkg.com/ionicons@7.1.0/dist/ionicons/ionicons.js"></script>
         <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.js"></script>
