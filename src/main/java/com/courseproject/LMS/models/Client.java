@@ -5,6 +5,7 @@ import lombok.Getter;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Entity
 @Getter
@@ -30,6 +31,9 @@ public class Client {
 
     @Column(name = "creation_date")
     private LocalDateTime creationDate;
+
+    @ManyToMany(mappedBy = "clients")
+    private List<Group> groups;
 
     @PrePersist
     protected void onCreate() {

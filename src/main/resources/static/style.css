@@ -840,7 +840,7 @@ input[type="checkbox"]:checked + .oval-checkbox {
 .teachers-cards {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    grid-gap: 20px;
+    gap: 20px;
 }
 
 .teachers-cards .card {
@@ -848,14 +848,15 @@ input[type="checkbox"]:checked + .oval-checkbox {
     box-shadow: 0 7px 25px rgba(0, 0, 0, 0.08);
     border-radius: 8px;
     padding: 20px;
-    margin: 20px;
     text-align: center;
 }
 
 .teachers-cards .card img {
     width: 100%;
-
+    height: auto;
+    border-radius: 8px;
 }
+
 .teachers-cards .card .card-description {
     padding: 10px;
 }

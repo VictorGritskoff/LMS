@@ -7,7 +7,9 @@ $('document').ready(function (){
             console.log('Course data:', course);
             $('#idUpdate').val(course.courseId);
             $('#courseNameEdit').val(course.name);
-            $('#courseTeacherEdit').val(course.teacher.teacherId); // Устанавливаем значение преподавателя
+            $('#courseTeacherEdit').val(course.teacher.teacherId);
+            $('#imagePathEdit').val(course.imagePath);
+            $('#descriptionEdit').val(course.description);
             $('#priceEdit').val(course.price);
 
             // Устанавливаем выбранное значение в выпадающем списке преподавателей

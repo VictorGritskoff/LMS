@@ -18,12 +18,14 @@ public class CourseController {
     private CourseService courseService;
     @Autowired
     private TeacherService teacherService;
+
     @GetMapping("/courses")
     public String getCourses(Model model){
         List<Teacher> teacherList = teacherService.getTeachers();
         List<Course> courseList = courseService.getCourses();
         model.addAttribute("teachers", teacherList);
         model.addAttribute("courses", courseList);
+        model.addAttribute("coursesWithDetails", courseList);
         return "courses";
     }
     @PostMapping("/courses/addNew")

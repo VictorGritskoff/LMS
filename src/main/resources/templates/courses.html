@@ -51,6 +51,12 @@
                 </a>
             </li>
             <li>
+                <a th:href="@{/groups}">
+                    <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
+                    <span class="title">Группы</span>
+                </a>
+            </li>
+            <li>
                 <a th:href="@{/analytics}">
                     <span class="icon"><ion-icon name="podium-outline"></ion-icon></span>
                     <span class="title"> Аналитика</span>
@@ -119,6 +125,20 @@
             </table>
         </div>
 
+        <div class="teachers-container">
+            <h1>Карточки курсов</h1>
+            <div class="teachers-cards">
+                <div th:each="course : ${coursesWithDetails}" class="card">
+                    <img th:if="${course.imagePath != null && !course.imagePath.isEmpty()}" th:src="@{${course.imagePath}}" alt="Изображение курса" class="card-img-top">
+                    <img th:unless="${course.imagePath != null && !course.imagePath.isEmpty()}" src="/icons/code-1839406_1280.jpg" alt="Изображение курса по умолчанию" class="card-img-top">
+                    <div class="card-body">
+                        <h5 class="card-title" th:text="${course.name}">Course Name</h5>
+                        <p class="card-text card-description" th:text="${course.description}">Course Description</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+
         <!-- ADD MODAL -->
         <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
             <div class="modal-dialog" role="document">
@@ -148,7 +168,14 @@
                             <div class="form-group">
                                 <label for="priceAdd" class="col-form-label">Цена курса (руб):</label>
                                 <input type="text" class="form-control" id="priceAdd" name="price" required pattern="[0-9.]*" title="Может содержать только цифры и точку">
-
+                            </div>
+                            <div class="form-group">
+                                <label for="imagePathAdd" class="col-form-label">Изображение курса:</label>
+                                <input type="file" class="form-control-file" id="imagePathAdd" name="imageFile" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="descriptionAdd" class="col-form-label">Описание курса:</label>
+                                <textarea class="form-control" id="descriptionAdd" name="description" rows="3" required></textarea>
                             </div>
                             <div class="form-group">
                                 <button type="submit" class="btn btn-primary">Сохранить</button>
@@ -190,6 +217,14 @@
                             <div class="form-group">
                                 <label for="priceEdit" class="col-form-label">Цена курса (руб):</label>
                                 <input type="text" class="form-control" id="priceEdit" name="price" required pattern="[0-9.]*" title="Может содержать только цифры и точку">
+                            </div>
+                            <div class="form-group">
+                                <label for="imagePathEdit" class="col-form-label">Изображение курса:</label>
+                                <input type="file" class="form-control-file" id="imagePathEdit" name="imageFile" required>
+                            </div>
+                            <div class="form-group">
+                                <label for="descriptionEdit" class="col-form-label">Описание курса:</label>
+                                <textarea class="form-control" id="descriptionEdit" name="description" rows="3" required></textarea>
                             </div>
                             <!-- Скрытое поле для идентификатора клиента -->
                             <input type="hidden" id="idUpdate" name="id">

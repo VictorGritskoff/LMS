@@ -26,4 +26,7 @@ public class Course {
 
     @Column(name = "image_path")
     private String imagePath;
+
+    @Column(name = "description", length = 1000)
+    private String description; // Новое поле для описания курса
 }

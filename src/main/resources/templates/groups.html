@@ -45,13 +45,13 @@
         <span class="title">Преподаватели</span>
       </a>
     </li>
-    <li class="active">
+    <li>
       <a th:href="@{/orders}">
         <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
         <span class="title">Заказы</span>
       </a>
     </li>
-    <li>
+    <li class="active">
       <a th:href="@{/groups}">
         <span class="icon"><ion-icon name="people-outline"></ion-icon></span>
         <span class="title">Группы</span>
@@ -92,28 +92,34 @@
     </div>
   </div>
   <div class="customers-container">
-    <h1>Заказы</h1>
-    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">Добавить заказ</button>
+    <h1>Группы</h1>
+    <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addModal" data-whatever="@mdo">Добавить группу</button>
     <table id="example" class="customers-table">
       <thead>
       <tr>
         <th>Id</th>
-        <th>Имя клиента</th>
         <th>Курс</th>
-        <th>Цена</th>
+        <th>Клиенты</th>
+        <th>Дата</th>
+        <th>Состояние</th>
         <th>Действия</th>
       </tr>
       </thead>
       <tbody>
-      <tr th:each="order : ${orders}">
-        <td th:text="${order.orderId}"></td>
-        <td th:text="${order.client.surname}"></td>
-        <td th:text="${order.course.name}"></td>
-        <td th:text="${order.orderPrice}"></td>
+      <tr th:each="group : ${groups}">
+        <td th:text="${group.groupId}"></td>
+        <td th:text="${group.course.name}"></td>
+        <td th:text="${group.clientCount}"></td>
+        <td th:text="${group.creationDate}"></td>
+        <td th:text="${group.status}"></td>
         <td>
           <div class="btn-group">
-            <a th:href="@{/orders/findById(id=${order.orderId})}" class="btn btn-success" id="editButton"><ion-icon name="pencil-outline"></ion-icon></a>
-            <a th:href="@{/orders/delete(id=${order.orderId})}" class="btn btn-danger" id="deleteButton"><ion-icon name="trash-outline"></ion-icon></a>
+            <a th:href="@{/groups/findById(id=${group.groupId})}" class="btn btn-success" id="editButton">
+              <ion-icon name="pencil-outline"></ion-icon>
+            </a>
+            <a th:href="@{/groups/delete(id=${group.groupId})}" class="btn btn-danger" id="deleteButton">
+              <ion-icon name="trash-outline"></ion-icon>
+            </a>
           </div>
         </td>
       </tr>
@@ -127,37 +133,32 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Добавление нового заказа</h5>
+        <h5 class="modal-title" id="exampleModalLabel">Добавление новой группы</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/orders/addNew}" method="post" id="addClientForm">
-          <div class="form-group">
-            <label for="orderClient" class="col-form-label">Клиент:</label>
-            <select class="form-control" id="orderClient" name="client" required>
-              <option value="">--ВЫБРАТЬ--</option>
-              <option th:each="client : ${customers}"
-                      th:value="${client.clientId}"
-                      th:text="${client.surname}">
-              </option>
-            </select>
-          </div>
+        <form th:action="@{/groups/addNew}" method="post" id="addGroupForm">
           <div class="form-group">
             <label for="orderCourse" class="col-form-label">Курс:</label>
             <select class="form-control" id="orderCourse" name="course" required>
               <option value="">--ВЫБРАТЬ--</option>
-              <option th:each="course : ${courses}"
-                      th:value="${course.courseId}"
-                      th:text="${course.name}"
-                      th:data-price="${course.price}">
+              <option th:each="course : ${courses}" th:value="${course.courseId}" th:text="${course.name}">
               </option>
             </select>
           </div>
           <div class="form-group">
-            <label for="orderPrice" class="col-form-label">Сумма заказа:</label>
-            <input type="text" class="form-control" id="orderPrice" name="orderPrice" readonly pattern="[0-9]+" title="Цена должна содержать только цифры">
+            <label for="orderClients" class="col-form-label">Клиенты:</label>
+            <select multiple class="form-control" id="orderClients" name="clients" required>
+              <option value="">--ВЫБРАТЬ--</option>
+              <option th:each="client : ${customers}" th:value="${client.clientId}" th:text="${client.surname}">
+              </option>
+            </select>
+          </div>
+          <div class="form-group">
+            <label for="groupDate" class="col-form-label">Дата начала:</label>
+            <input type="date" class="form-control" id="groupDate" name="groupDate" value="2024-06-06" title="Введите дату" required>
           </div>
           <div class="form-group">
             <button type="submit" class="btn btn-primary">Сохранить</button>
@@ -176,16 +177,17 @@
   <div class="modal-dialog" role="document">
     <div class="modal-content">
       <div class="modal-header">
-        <h5 class="modal-title" id="">Изменение данных заказа</h5>
+        <h5 class="modal-title" id="">Изменение данных группы</h5>
         <button type="button" class="close" data-dismiss="modal" aria-label="Close">
           <span aria-hidden="true">&times;</span>
         </button>
       </div>
       <div class="modal-body">
-        <form th:action="@{/orders/update}" th:method="post">
+        <form th:action="@{/groups/update}" th:method="post">
           <div class="form-group">
-            <label for="orderClientUpdate" class="col-form-label">Клиент:</label>
-            <select class="form-control" id="orderClientUpdate" name="orderClientUpdate">
+            <label for="groupClientUpdate" class="col-form-label">Клиент:</label>
+            <select multiple class="form-control" id="groupClientUpdate" name="groupClientUpdate" required>
+              <option value="">--ВЫБРАТЬ--</option>
               <option th:each="client : ${customers}"
                       th:value="${client.clientId}"
                       th:text="${client.surname}">
@@ -193,8 +195,9 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="orderCourseUpdate" class="col-form-label">Курс:</label>
-            <select class="form-control" id="orderCourseUpdate" name="orderCourseUpdate">
+            <label for="groupCourseUpdate" class="col-form-label">Курс:</label>
+            <select class="form-control" id="groupCourseUpdate" name="groupCourseUpdate" required>
+              <option value="">--ВЫБРАТЬ--</option>
               <option th:each="course : ${courses}"
                       th:value="${course.courseId}"
                       th:text="${course.name}">
@@ -202,11 +205,11 @@
             </select>
           </div>
           <div class="form-group">
-            <label for="orderPriceUpdate" class="col-form-label">Сумма заказа:</label>
-            <input type="text" class="form-control" id="orderPriceUpdate" name="orderPriceUpdate" required pattern="[0-9]+" title="Цена должна содержать только цифры">
+            <label for="groupDateUpdate" class="col-form-label">Дата начала:</label>
+            <input type="date" class="form-control" id="groupDateUpdate" name="groupDateUpdate" title="Введите дату" required>
           </div>
-          <!-- Скрытое поле для идентификатора клиента -->
-          <input type="hidden" id="idEdit" name="id">
+          <!-- Скрытое поле для идентификатора группы -->
+          <input type="hidden" id="groupId" name="groupId">
           <!-- Скрытое поле для указания метода запроса как PUT -->
           <input type="hidden" name="_method" value="put">
           <div class="form-group">
@@ -232,7 +235,7 @@
         </button>
       </div>
       <div class="modal-body">
-        <p>Вы уверены, что нужно удалить данный заказ из базы данных?</p>
+        <p>Вы уверены, что нужно удалить данную группу из базы данных?</p>
       </div>
       <div class="modal-footer">
         <button type="button" class="btn btn-secondary" data-dismiss="modal">Нет</button>
@@ -255,7 +258,7 @@
 <script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.html5.min.js"></script>
 <script src="https://cdn.datatables.net/buttons/3.0.1/js/buttons.print.min.js"></script>
 <script src="/js/downloadTableButtons.js"></script>
-<script src="/js/orderButtons.js"></script>
+<script src="/js/groupButtons.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
 <script src="/js/exitFunction.js"></script>
 <script src="https://cdn.jsdelivr.net/npm/popper.js@1.14.7/dist/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDzwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
